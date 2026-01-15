@@ -31,49 +31,51 @@
         /* Sofá inferior (L shape) - viene desde abajo */
         .sofa-bottom {
             fill: #fff;
-            animation: loopFromBottom 8s ease-in-out infinite;
+            animation: slideFromBottom 0.8s ease-out forwards;
         }
 
         /* Sofá medio - viene desde la derecha */
         .sofa-middle {
             fill: #fff;
-            animation: loopFromRight 8s ease-in-out infinite;
+            animation: slideFromRight 0.8s ease-out forwards;
+            animation-delay: 0.15s;
         }
 
         /* Sofá superior - viene desde arriba */
         .sofa-top {
             fill: #fff;
-            animation: loopFromTop 8s ease-in-out infinite;
+            animation: slideFromTop 0.8s ease-out forwards;
+            animation-delay: 0.3s;
         }
 
-        @keyframes loopFromBottom {
-            0%, 100% {
+        @keyframes slideFromBottom {
+            from {
                 transform: translateY(25px);
-                opacity: 0.3;
+                opacity: 0;
             }
-            35%, 65% {
+            to {
                 transform: translateY(0);
                 opacity: 1;
             }
         }
 
-        @keyframes loopFromRight {
-            0%, 100% {
+        @keyframes slideFromRight {
+            from {
                 transform: translateX(25px);
-                opacity: 0.3;
+                opacity: 0;
             }
-            35%, 65% {
+            to {
                 transform: translateX(0);
                 opacity: 1;
             }
         }
 
-        @keyframes loopFromTop {
-            0%, 100% {
+        @keyframes slideFromTop {
+            from {
                 transform: translateY(-25px);
-                opacity: 0.3;
+                opacity: 0;
             }
-            35%, 65% {
+            to {
                 transform: translateY(0);
                 opacity: 1;
             }
