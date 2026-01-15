@@ -28,24 +28,56 @@
            ANIMACIONES
            ========================================== */
 
-        /* Icono E - dibujado con stroke */
-        .icon-part {
-            fill: transparent;
-            stroke: #fff;
-            stroke-width: 1;
-            stroke-dasharray: 200;
-            stroke-dashoffset: 200;
-            animation: drawIcon 1.2s ease-out forwards;
+        /* Sofá inferior (L shape) - viene desde abajo */
+        .sofa-bottom {
+            fill: #fff;
+            animation: slideFromBottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
-        .icon-part:nth-child(1) { animation-delay: 0s; }
-        .icon-part:nth-child(2) { animation-delay: 0.15s; }
-        .icon-part:nth-child(3) { animation-delay: 0.3s; }
+        /* Sofá medio - viene desde la derecha */
+        .sofa-middle {
+            fill: #fff;
+            animation: slideFromRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: 0.15s;
+        }
 
-        @keyframes drawIcon {
+        /* Sofá superior - viene desde arriba */
+        .sofa-top {
+            fill: #fff;
+            animation: slideFromTop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes slideFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
             to {
-                stroke-dashoffset: 0;
-                fill: #fff;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -80,8 +112,9 @@
         }
 
         /* Efecto hover suave */
-        .logo-container:hover .icon-part {
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+        .logo-container:hover .icon-group {
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+            transition: filter 0.3s ease;
         }
 
         /* Botón replay */
@@ -109,14 +142,16 @@
             background: #f8f5f0;
         }
 
-        body.light .icon-part {
-            stroke: #1a4a4a;
-        }
-
-        body.light .icon-part,
+        body.light .sofa-bottom,
+        body.light .sofa-middle,
+        body.light .sofa-top,
         body.light .main-text,
         body.light .sub-text {
             fill: #1a4a4a;
+        }
+
+        body.light .logo-container:hover .icon-group {
+            filter: drop-shadow(0 0 8px rgba(26,74,74,0.3));
         }
 
         body.light .replay-btn {
@@ -151,11 +186,11 @@
 <body>
     <div class="logo-container">
         <svg id="logo-animado" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154.72 92.68">
-            <!-- Icono E (animado con stroke) -->
+            <!-- Icono E (3 sofás que se juntan) -->
             <g class="icon-group">
-                <polygon class="icon-part" points="73.31 22.71 69.74 22.71 69.74 36.99 85.05 36.99 85.05 33.43 73.31 33.43 73.31 22.71"/>
-                <polygon class="icon-part" points="77.25 19.16 77.25 22.71 81.46 22.71 81.46 26.36 77.25 26.36 77.25 29.83 81.46 29.83 81.46 29.83 84.98 29.83 84.98 27.88 84.98 26.36 84.98 19.16 77.25 19.16"/>
-                <polygon class="icon-part" points="73.26 15.52 81.14 15.52 81.14 12 69.78 12 69.78 19.14 73.26 19.14 73.26 15.52"/>
+                <polygon class="sofa-bottom" points="73.31 22.71 69.74 22.71 69.74 36.99 85.05 36.99 85.05 33.43 73.31 33.43 73.31 22.71"/>
+                <polygon class="sofa-middle" points="77.25 19.16 77.25 22.71 81.46 22.71 81.46 26.36 77.25 26.36 77.25 29.83 81.46 29.83 81.46 29.83 84.98 29.83 84.98 27.88 84.98 26.36 84.98 19.16 77.25 19.16"/>
+                <polygon class="sofa-top" points="73.26 15.52 81.14 15.52 81.14 12 69.78 12 69.78 19.14 73.26 19.14 73.26 15.52"/>
             </g>
 
             <!-- Texto principal "Espacial" -->
