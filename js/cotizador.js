@@ -229,17 +229,18 @@ function calcularCotizacion() {
     const numEspacios = Math.min(espacios.length, 10);
     const costoDiseno = PRECIOS_DISENO[numEspacios] || PRECIOS_DISENO[10];
 
-    // Total
-    const costoTotal = costoMaterializacion + costoDiseno;
-    const costoMin = Math.round(costoTotal * (1 - VARIACION));
-    const costoMax = Math.round(costoTotal * (1 + VARIACION));
+    // Rango de materializacion (solo materializacion, con variacion)
+    const matMin = Math.round(costoMaterializacion * (1 - VARIACION));
+    const matMax = Math.round(costoMaterializacion * (1 + VARIACION));
 
-    // Actualizar UI
-    document.getElementById('valor-min').textContent = formatCOP(costoMin);
-    document.getElementById('valor-max').textContent = formatCOP(costoMax);
-    document.getElementById('costo-diseno').textContent = formatCOP(costoDiseno);
+    // Actualizar UI - DISENO (principal, destacado)
+    document.getElementById('costo-diseno-principal').textContent = formatCOP(costoDiseno);
 
-    // Desglose de espacios
+    // Actualizar UI - MATERIALIZACION (secundario, estimado)
+    document.getElementById('valor-min').textContent = formatCOP(matMin);
+    document.getElementById('valor-max').textContent = formatCOP(matMax);
+
+    // Desglose de espacios (materializacion)
     const desgloseContainer = document.getElementById('desglose-espacios');
     desgloseContainer.innerHTML = '';
     desglose.forEach(item => {
@@ -255,7 +256,7 @@ function calcularCotizacion() {
     // Explicacion
     const acabadosText = acabados === 'estandar' ? 'estandar' : acabados === 'premium' ? 'premium' : 'de lujo';
     document.getElementById('resultado-explicacion').textContent =
-        `${espacios.length} espacio${espacios.length > 1 ? 's' : ''} con acabados ${acabadosText}, incluyendo diseno y materializacion.`;
+        `${espacios.length} espacio${espacios.length > 1 ? 's' : ''} con acabados ${acabadosText}`;
 
     // Log lead (para futuro webhook)
     console.log('Nuevo Lead Espacial:', {
