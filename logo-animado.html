@@ -31,12 +31,16 @@
         /* Sofá inferior (L shape) - viene desde abajo */
         .sofa-bottom {
             fill: #fff;
+            opacity: 0;
+            transform: translateY(25px);
             animation: slideFromBottom 0.8s ease-out forwards;
         }
 
         /* Sofá medio - viene desde la derecha */
         .sofa-middle {
             fill: #fff;
+            opacity: 0;
+            transform: translateX(25px);
             animation: slideFromRight 0.8s ease-out forwards;
             animation-delay: 0.15s;
         }
@@ -44,6 +48,8 @@
         /* Sofá superior - viene desde arriba */
         .sofa-top {
             fill: #fff;
+            opacity: 0;
+            transform: translateY(-25px);
             animation: slideFromTop 0.8s ease-out forwards;
             animation-delay: 0.3s;
         }
