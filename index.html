@@ -8,393 +8,481 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --teal-dark: #1a4a4a;
+            --teal-medium: #2d5f5f;
+            --beige-light: #f8f5f0;
+            --beige-medium: #d4c4b0;
+            --terracotta: #c9a08a;
+            --terracotta-light: rgba(201, 160, 138, 0.15);
+            --white: #ffffff;
+            --text-dark: #2c3e3e;
+            --text-muted: #6b7c7c;
+            --border-light: #e5ded4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--beige-light);
+        }
+
+        .reveal {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .reveal .slides {
+            background-color: var(--beige-light);
+        }
+
+        .reveal .slides section {
+            padding: 0;
+            background-color: var(--beige-light);
+        }
+
+        /* Image slides - full screen */
+        .slide-image {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--beige-light);
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Cotizador slide */
+        .slide-cotizador {
+            background-color: var(--white);
+            overflow-y: auto !important;
+            padding: 40px 20px !important;
+        }
+
+        .cotizador-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cotizador-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-style: italic;
+            text-align: center;
+            color: var(--teal-dark);
+            margin-bottom: 8px;
+        }
+
+        .cotizador-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--teal-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-num {
+            background-color: var(--terracotta);
+            color: var(--white);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .section-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .espacios-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .espacio-row {
+            display: grid;
+            grid-template-columns: 1fr 70px 30px;
+            gap: 8px;
+            align-items: center;
+            padding: 8px;
+            background: var(--beige-light);
+            border-radius: 6px;
+        }
+
+        .espacio-row select,
+        .espacio-row input {
+            padding: 8px;
+            border: 1px solid var(--border-light);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+
+        .espacio-row select {
+            background-color: var(--white);
+        }
+
+        .btn-remove {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: none;
+            background: #e74c3c;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 10px;
+            background: var(--white);
+            border: 2px dashed var(--border-light);
+            border-radius: 6px;
+            color: var(--teal-dark);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-add:hover {
+            border-color: var(--teal-dark);
+        }
+
+        .radio-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .radio-card {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 12px;
+            background-color: var(--beige-light);
+            border: 2px solid var(--border-light);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .radio-card input {
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        .radio-card:has(input:checked) {
+            border-color: var(--terracotta);
+            background-color: var(--terracotta-light);
+        }
+
+        .radio-content strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .radio-content span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-fields input {
+            padding: 10px 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            background-color: var(--beige-light);
+        }
+
+        .form-fields input:focus {
+            outline: none;
+            border-color: var(--teal-dark);
+        }
+
+        .btn-calculate {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--terracotta);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-calculate:hover {
+            background-color: #b8907a;
+        }
+
+        .cotizador-results {
+            margin-top: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            text-align: center;
+            color: var(--teal-dark);
+            margin-bottom: 15px;
+        }
+
+        .main-result {
+            background: linear-gradient(135deg, var(--teal-dark), var(--teal-medium));
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+        }
+
+        .result-explanation {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            margin-top: 8px;
+        }
+
+        .breakdown-section {
+            background-color: var(--beige-light);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .breakdown-section h4 {
+            font-size: 0.95rem;
+            color: var(--teal-dark);
+            margin-bottom: 12px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.85rem;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-item.total {
+            margin-top: 8px;
+            padding-top: 12px;
+            border-top: 2px solid var(--border-light);
+            font-weight: 600;
+        }
+
+        .disclaimer {
+            background-color: var(--terracotta-light);
+            border-left: 3px solid var(--terracotta);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .disclaimer h4 {
+            font-size: 0.85rem;
+            color: var(--teal-dark);
+            margin-bottom: 4px;
+        }
+
+        .disclaimer p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .cta-section p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--teal-dark);
+            margin-bottom: 12px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--teal-dark);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .btn-cta:hover {
+            background-color: var(--teal-medium);
+        }
+
+        /* Navigation styling */
+        .reveal .controls {
+            color: var(--teal-dark);
+        }
+
+        .reveal .progress {
+            background: var(--beige-medium);
+            height: 4px;
+        }
+
+        .reveal .progress span {
+            background: var(--terracotta);
+        }
+
+        /* Slide counter */
+        .slide-number {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            z-index: 100;
+        }
+    </style>
 </head>
 <body>
     <div class="reveal">
         <div class="slides">
-
-            <!-- SLIDE 1: Cover -->
-            <section class="slide-cover" data-background-image="images/backgrounds/cover-bg.jpg" data-background-opacity="0.8">
-                <div class="cover-content">
-                    <p class="cover-subtitle">INTERIORISMO | ARQUITECTURA</p>
-                    <div class="logo-container">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="10" y="10" width="20" height="20" fill="white"/>
-                                <rect x="30" y="10" width="10" height="10" fill="white"/>
-                                <rect x="30" y="30" width="20" height="20" fill="white"/>
-                            </svg>
-                        </div>
-                        <h1 class="logo-text">Espacia<span class="logo-l">L</span></h1>
-                        <p class="logo-subtext">ESTUDIO</p>
-                    </div>
-                    <div class="cover-footer">
-                        <p class="cover-website">WWW.ESPACIALESTUDIO.COM</p>
-                        <p class="cover-tagline">TRANSFORMAMOS VIDAS A TRAVES DE LOS ESPACIOS</p>
-                    </div>
-                </div>
+            <!-- Slide 1: Cover -->
+            <section class="slide-image">
+                <img src="images/slides/slide-01.png" alt="Espacial Estudio - Cover">
             </section>
 
-            <!-- SLIDE 2: About / Team Intro -->
-            <section class="slide-about">
-                <div class="about-layout">
-                    <div class="about-text">
-                        <h2 class="about-title"><span class="highlight">Transformamos vidas,</span><br>a traves de los espacios!</h2>
-                        <p class="about-description">Somos ese equipo que te ayuda a hacer realidad tu sueno, evitandote todos los dolores de cabeza y ayudandote a materializarlos como si fueran nuestros.</p>
-                    </div>
-                    <div class="about-image">
-                        <img src="images/team-photo.jpg" alt="Equipo Espacial Estudio">
-                    </div>
-                </div>
-                <p class="slide-url">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 2: Team Intro -->
+            <section class="slide-image">
+                <img src="images/slides/slide-02.png" alt="Transformamos vidas">
             </section>
 
-            <!-- SLIDE 3: Services -->
-            <section class="slide-services">
-                <div class="services-layout">
-                    <div class="services-text">
-                        <h2><span class="number-big">2</span> <span class="services-subtitle">SERVICIOS PARA</span><br><span class="italic">hacer realidad</span><br><span class="italic highlight-text">tu sueno</span></h2>
-                        <div class="services-list">
-                            <div class="service-item">
-                                <div class="service-icon">
-                                    <svg viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M10 40 L25 10 L40 40 Z"/>
-                                        <path d="M15 30 L35 30"/>
-                                        <circle cx="25" cy="35" r="3"/>
-                                    </svg>
-                                </div>
-                                <div class="service-text">
-                                    <strong>Diseno</strong><br>Interior
-                                </div>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-icon">
-                                    <svg viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <rect x="10" y="25" width="8" height="5"/>
-                                        <rect x="21" y="20" width="8" height="10"/>
-                                        <rect x="32" y="15" width="8" height="15"/>
-                                        <path d="M8 35 L42 35"/>
-                                    </svg>
-                                </div>
-                                <div class="service-text">
-                                    <strong>Materializacion</strong><br>de proyectos
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="services-image">
-                        <img src="images/materials.jpg" alt="Materiales de diseno">
-                    </div>
-                </div>
-                <p class="slide-url">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 3: Services -->
+            <section class="slide-image">
+                <img src="images/slides/slide-03.png" alt="2 Servicios">
             </section>
 
-            <!-- SLIDE 4: Process Overview -->
-            <section class="slide-process">
-                <div class="process-header">
-                    <h2><span class="number-big">4</span> <span class="process-subtitle">PASOS PARA TRANSFORMAR</span><br><span class="italic">tu espacio</span> <span class="teal-text">CON EL SERVICIO DE DISENO INTERIOR</span></h2>
-                </div>
-                <div class="process-steps">
-                    <div class="step">
-                        <div class="step-circle">
-                            <span class="step-number">1.</span>
-                        </div>
-                        <p class="step-title">ENTENDEMOS<br>TUS NECESIDADES</p>
-                        <p class="step-subtitle italic">y gustos</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-circle">
-                            <span class="step-number">2.</span>
-                        </div>
-                        <p class="step-title">PROPUESTAS DE<br>DISTRIBUCION Y</p>
-                        <p class="step-subtitle italic">look & feel</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-circle">
-                            <span class="step-number">3.</span>
-                        </div>
-                        <p class="step-title">PROPUESTAS DE<br>DISENO 3D</p>
-                        <p class="step-subtitle italic">renders fotorrealistas</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-circle">
-                            <span class="step-number">4.</span>
-                        </div>
-                        <p class="step-title">PRESUPUESTO</p>
-                        <p class="step-subtitle italic">detallado</p>
-                    </div>
-                </div>
-                <p class="slide-url">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 4: Process -->
+            <section class="slide-image">
+                <img src="images/slides/slide-04.png" alt="4 Pasos">
             </section>
 
-            <!-- SLIDE 5: Timeline -->
-            <section class="slide-timeline">
-                <div class="timeline-container">
-                    <div class="timeline-legend">
-                        <div class="legend-item"><span class="legend-dot teal"></span> A CARGO DE ESPACIAL</div>
-                        <div class="legend-item"><span class="legend-dot terracotta"></span> A CARGO DEL CLIENTE</div>
-                        <div class="legend-item"><span class="legend-dot beige"></span> TRABAJO EN CONJUNTO</div>
-                    </div>
-
-                    <div class="timeline-phase">
-                        <h3><span class="phase-number">1</span> DESPEGO EL COHETE</h3>
-                        <div class="timeline-items">
-                            <div class="timeline-item teal">Llamada de reconocimiento para conocer tus necesidades</div>
-                            <div class="timeline-item terracotta">Defines un presupuesto de inversion</div>
-                            <div class="timeline-item terracotta">Nos compartes tus referentes, planos, fotos y videos del espacio</div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-phase">
-                        <h3><span class="phase-number">2</span> LOOK AND FEEL <span class="timeline-days">a los 10 dias</span></h3>
-                        <div class="timeline-items">
-                            <div class="timeline-item beige">Agendamos una Reunion virtual</div>
-                            <div class="timeline-item teal">2 o 3 propuestas de distribucion (layout)</div>
-                            <div class="timeline-item teal">Estilo y concepto con imagenes de referencia</div>
-                            <div class="timeline-item terracotta">nos compartes tu feedback</div>
-                            <div class="timeline-item teal">Te compartimos las correcciones</div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-phase">
-                        <h3><span class="phase-number">3</span> DISENO 3D / RENDERS <span class="timeline-days">a los 15 dias</span></h3>
-                        <div class="timeline-items">
-                            <div class="timeline-item beige">Agendamos una Reunion virtual</div>
-                            <div class="timeline-item teal">Presentacion con renders (imagenes foto realistas)</div>
-                            <div class="timeline-item terracotta">nos compartes tu feedback</div>
-                            <div class="timeline-item teal">Te compartimos las correcciones</div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-phase">
-                        <h3><span class="phase-number">4</span> PRESUPUESTO <span class="timeline-days">a los 15 dias</span></h3>
-                        <div class="timeline-items">
-                            <div class="timeline-item beige">Agendamos una Reunion virtual</div>
-                            <div class="timeline-item teal">Cartillas de cotizacion y cuadro de presupuesto detallado</div>
-                            <div class="timeline-item terracotta">nos compartes tu feedback</div>
-                            <div class="timeline-item teal">Te compartimos las correcciones</div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-total">
-                        <p class="total-label">ENTREGA FINAL</p>
-                        <p class="total-time">Tiempo total<br><strong>8 A 10 SEMANAS</strong></p>
-                    </div>
-                </div>
+            <!-- Slide 5: Timeline -->
+            <section class="slide-image">
+                <img src="images/slides/slide-05.png" alt="Timeline">
             </section>
 
-            <!-- SLIDE 6: Pricing Intro -->
-            <section class="slide-pricing-intro">
-                <h2 class="pricing-title italic">Precios</h2>
-                <h3 class="pricing-subtitle">PROYECTOS RESIDENCIALES</h3>
-                <p class="pricing-explanation">El valor total de tu proyecto dependera de la cantidad de espacios que vayamos a intervenir. <strong>Un espacio equivale a un area que tenga mas de 2 muebles.</strong></p>
-                <div class="floorplans">
-                    <div class="floorplan">
-                        <img src="images/floorplan-1.png" alt="1 espacio">
-                    </div>
-                    <div class="floorplan">
-                        <img src="images/floorplan-3.png" alt="3 espacios">
-                    </div>
-                    <div class="floorplan">
-                        <img src="images/floorplan-6.png" alt="6 espacios">
-                    </div>
-                </div>
-                <p class="slide-url">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 6: Pricing Intro -->
+            <section class="slide-image">
+                <img src="images/slides/slide-06.png" alt="Precios - Intro">
             </section>
 
-            <!-- SLIDE 7: Pricing 1-5 -->
-            <section class="slide-pricing" data-background-color="#1a4a4a">
-                <h2 class="pricing-title italic white">Precios</h2>
-                <h3 class="pricing-subtitle white">PROYECTOS RESIDENCIALES</h3>
-                <div class="pricing-cards">
-                    <div class="pricing-card">
-                        <span class="spaces-number">1</span>
-                        <span class="spaces-label">ESPACIO</span>
-                        <span class="price-question italic">Cuanto cuesta?</span>
-                        <span class="price-total">Valor total<br><strong>$2.800.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$2.800.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">2</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$5.200.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$2.600.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">3</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$7.245.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$2.415.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">4</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$8.940.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$2.235.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">5</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$9.975.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$1.995.000</strong></span>
-                    </div>
-                </div>
-                <p class="slide-url white">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 7: Pricing 1-5 -->
+            <section class="slide-image">
+                <img src="images/slides/slide-07.png" alt="Precios 1-5 espacios">
             </section>
 
-            <!-- SLIDE 8: Pricing 6-10 -->
-            <section class="slide-pricing" data-background-color="#1a4a4a">
-                <h2 class="pricing-title italic white">Precios</h2>
-                <h3 class="pricing-subtitle white">PROYECTOS RESIDENCIALES</h3>
-                <div class="pricing-cards">
-                    <div class="pricing-card">
-                        <span class="spaces-number">6</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuesta?</span>
-                        <span class="price-total">Valor total<br><strong>$10.500.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$1.750.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">7</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$12.145.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$1.735.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">8</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$13.040.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$1.630.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">9</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$13.230.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$1.470.000</strong></span>
-                    </div>
-                    <div class="pricing-card">
-                        <span class="spaces-number">10</span>
-                        <span class="spaces-label">ESPACIOS</span>
-                        <span class="price-question italic">Cuanto cuestan?</span>
-                        <span class="price-total">Valor total<br><strong>$13.650.000</strong></span>
-                        <span class="price-per">Valor x espacio<br><strong>$1.365.000</strong></span>
-                    </div>
-                </div>
-                <p class="slide-url white">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 8: Pricing 6-10 -->
+            <section class="slide-image">
+                <img src="images/slides/slide-08.png" alt="Precios 6-10 espacios">
             </section>
 
-            <!-- SLIDE 9: Team -->
-            <section class="slide-team">
-                <h2 class="team-header">QUIENES SOMOS<br><span class="italic">nuestro equipo</span></h2>
-                <div class="team-members">
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="images/meli.jpg" alt="Meli">
-                        </div>
-                        <h3 class="member-name">MELI</h3>
-                        <p class="member-role italic">Cofundadora<br>Ingeniera de Diseno</p>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="images/mari.jpg" alt="Mari">
-                        </div>
-                        <h3 class="member-name">MARI</h3>
-                        <p class="member-role italic">Cofundadora<br>Arquitecta Interiorista</p>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="images/dani.jpg" alt="Dani">
-                        </div>
-                        <h3 class="member-name">DANI</h3>
-                        <p class="member-role italic">Arquitecta<br>Lider de Proyectos</p>
-                    </div>
-                </div>
-                <p class="slide-url">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 9: Team -->
+            <section class="slide-image">
+                <img src="images/slides/slide-09.png" alt="Nuestro equipo">
             </section>
 
-            <!-- SLIDE 10: Testimonials -->
-            <section class="slide-testimonials" data-background-color="#1a4a4a">
-                <h2 class="testimonials-header white">LO QUE DICEN DE<br><span class="italic">nuestro trabajo</span></h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="quote-icon">"</div>
-                        <p class="testimonial-text">"Ustedes me ayudaron a cumplir mi sueno y pusieron un granito de arena para curar a muchos ninos, tengo la agenda full, me valorizaron impresionante mi consultorio. Me encanto su energia, no pude haber encontrado otras personas que reflejaran mejor lo que yo queria en mi espacio"</p>
-                        <p class="testimonial-author"><strong>CAROLINA TOBON</strong><br>PROYECTO DOCTORA CRESER</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="quote-icon">"</div>
-                        <p class="testimonial-text">"Quiero agradecerles por el excelente trabajo que han realizado. Quedamos muy contentos, a destacar: la calidad, el buen gusto, el cumplimiento. Tienen unos excelentes proveedores. El buen trato de su equipo y los proveedores con el cliente. Mil y mil gracias. Que sigan teniendo muchos exitos".</p>
-                        <p class="testimonial-author"><strong>MARTHA ESCOBAR</strong><br>PROYECTO ENTRE PARQUES</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="quote-icon">"</div>
-                        <p class="testimonial-text">"Reitero que su profesionalismo me parece uno de los mejores valores de su proyecto. Son demasiado buenas en lo que hacen y su actitud hacia el cliente me parece respetuosa y adaptativa, sin ser condescendientes. Las felicito! Mil gracias.</p>
-                        <p class="testimonial-author"><strong>DANIELA HOYOS</strong><br>PROYECTO CASA LA CONCHITA</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="quote-icon">"</div>
-                        <p class="testimonial-text">"Me gusto muchisimo que son muy flexibles para aterrizar el presupuesto en caso de uno necesitarlo, buscando alternativas igual de lindas y logrando que el resultado siga siendo de ensueno. La confianza que generan y pensar en cada detalle para personalizar el proyecto, maravilloso!</p>
-                        <p class="testimonial-author"><strong>CLAUDIA GOMEZ</strong><br>PROYECTO ESTADIO</p>
-                    </div>
-                </div>
+            <!-- Slide 10: Testimonials -->
+            <section class="slide-image">
+                <img src="images/slides/slide-10.png" alt="Testimonios">
             </section>
 
-            <!-- SLIDE 11: Fine Print -->
-            <section class="slide-fineprint">
-                <div class="fineprint-header">
-                    <h2>LA LETRA PEQUENA.<br><span class="italic">Ten en cuenta que:</span></h2>
-                </div>
-                <div class="fineprint-content">
-                    <div class="fineprint-column">
-                        <h3>PARA INICIAR</h3>
-                        <p>Necesitamos los planos del espacio, <strong>debes enviarlos digitalmente en formato PDF o AUTOCAD</strong>. Si no cuentas con ellos, podemos hacer el levantamiento de planos <strong>por un valor adicional de $5.500 el m2</strong>. Si cuentas con los planos fisicos pero no estan digitalizados, debes pagar un valor adicional de $2.500 por m2.</p>
-
-                        <h3>FORMAS DE PAGO</h3>
-                        <p><strong>Tenemos 3 opciones:</strong></p>
-                        <ol>
-                            <li>Hacer el pago del 100% del proyecto para obtener el <strong>5% de descuento.</strong></li>
-                            <li>Hacer el pago del 100% del proyecto en las <strong>proximas 24 horas para obtener un 10% de dcto.</strong></li>
-                            <li>Hacer el pago del <strong>50% del proyecto para iniciar</strong>, el 30% en la entrega de los renders y el 20% adicional en la entrega del presupuesto.</li>
-                        </ol>
-                        <p class="note">*Nuestro servicio de DISENO INTERIOR NO INCLUYE planos tecnicos, licencias, polizas, estudios electricos, estructurales, paisajismo ni ningun bien fisico como muebles, luminarias, etc...</p>
-                    </div>
-                    <div class="fineprint-column">
-                        <h3>DURANTE EL PROCESO</h3>
-                        <p>Puedes realizar <strong>los cambios que quieras durante la etapa en curso</strong>, si quieres realizar un cambio grande correspondiente a una etapa cerrada, esto tendra un cobro adicional.</p>
-                        <p><strong>Los tiempos del proceso pueden variar de acuerdo a tu agilidad de respuesta</strong>, podemos realizar los cambios que quieras pero ten en cuenta que tenemos unos procesos que requieren unos tiempos ya establecidos.</p>
-                        <p>Cada vez que realices cambios en una etapa, <strong>ESPACIAL cuenta con 8 dias calendario (maximo)</strong> para hacer los cambios pertinentes.</p>
-                        <p>Es muy importante que realices <strong>el agendamiento oportuno de las reuniones y el feedback de las etapas</strong> en los plazos establecidos para poder cumplir con los tiempos planteados.</p>
-                        <p>En caso de que <strong>los tiempos de retroalimentacion no se cumplan</strong>, el proceso podra darse por terminado unilateralmente <strong>sin incurrir en devolucion de dinero.</strong></p>
-                        <p>El proceso de <strong>materializacion del proyecto</strong> comenzara una vez terminemos el proceso de DISENO INTERIOR y tengamos aprobado el presupuesto.</p>
-                    </div>
-                </div>
-                <p class="slide-url">WWW.ESPACIALESTUDIO.COM</p>
+            <!-- Slide 11: Fine Print -->
+            <section class="slide-image">
+                <img src="images/slides/slide-11.png" alt="La letra pequena">
             </section>
 
-            <!-- SLIDE 12: Cotizador -->
+            <!-- Slide 12: Contact -->
+            <section class="slide-image">
+                <img src="images/slides/slide-12.png" alt="Contacto">
+            </section>
+
+            <!-- Slide 13: Cotizador -->
             <section class="slide-cotizador">
                 <div class="cotizador-container">
-                    <h2 class="cotizador-title italic">Calcula tu inversion</h2>
-                    <p class="cotizador-subtitle">Obtén un estimado de inversión para transformar tu espacio</p>
+                    <h2 class="cotizador-title">Calcula tu inversion</h2>
+                    <p class="cotizador-subtitle">Obten un estimado para transformar tu espacio</p>
 
                     <div class="cotizador-form" id="cotizador-form">
-                        <!-- Step 1: Spaces -->
                         <div class="form-section">
                             <h3 class="section-title"><span class="step-num">1</span> Que espacios quieres transformar?</h3>
-                            <p class="section-hint">Agrega cada espacio con su tipo y metros cuadrados aproximados</p>
+                            <p class="section-hint">Agrega cada espacio con su tipo y metros cuadrados</p>
                             <div class="espacios-container" id="espacios-container"></div>
                             <button type="button" class="btn-add" onclick="agregarEspacio()">+ Agregar otro espacio</button>
                         </div>
 
-                        <!-- Step 2: Finish Level -->
                         <div class="form-section">
                             <h3 class="section-title"><span class="step-num">2</span> Nivel de acabados</h3>
                             <p class="section-hint">Que calidad de materiales prefieres?</p>
@@ -403,29 +491,28 @@
                                     <input type="radio" name="acabados" value="estandar" checked>
                                     <span class="radio-content">
                                         <strong>Estandar</strong>
-                                        <span>Materiales de buena calidad, marcas nacionales reconocidas.</span>
+                                        <span>Materiales de buena calidad, marcas nacionales.</span>
                                     </span>
                                 </label>
                                 <label class="radio-card">
                                     <input type="radio" name="acabados" value="premium">
                                     <span class="radio-content">
                                         <strong>Premium</strong>
-                                        <span>Materiales de alta gama, combinacion de marcas nacionales e importadas.</span>
+                                        <span>Alta gama, marcas nacionales e importadas.</span>
                                     </span>
                                 </label>
                                 <label class="radio-card">
                                     <input type="radio" name="acabados" value="lujo">
                                     <span class="radio-content">
                                         <strong>Lujo</strong>
-                                        <span>Materiales exclusivos, marcas de disenador, importados.</span>
+                                        <span>Materiales exclusivos, marcas de disenador.</span>
                                     </span>
                                 </label>
                             </div>
                         </div>
 
-                        <!-- Step 3: Contact -->
                         <div class="form-section">
-                            <h3 class="section-title"><span class="step-num">3</span> Dejanos tus datos para ver tu estimado</h3>
+                            <h3 class="section-title"><span class="step-num">3</span> Tus datos de contacto</h3>
                             <div class="form-fields">
                                 <input type="text" id="lead-nombre" placeholder="Nombre completo *" required>
                                 <input type="email" id="lead-email" placeholder="Correo electronico *" required>
@@ -433,10 +520,9 @@
                             </div>
                         </div>
 
-                        <button class="btn-calculate" onclick="calcularCotizacion()">QUIERO VER MI ESTIMADO!</button>
+                        <button class="btn-calculate" onclick="calcularCotizacion()">VER MI ESTIMADO</button>
                     </div>
 
-                    <!-- Results -->
                     <div class="cotizador-results" id="cotizador-results" style="display: none;">
                         <h3 class="results-title">Tu Estimado de Inversion</h3>
                         <div class="main-result">
@@ -454,39 +540,15 @@
                         </div>
                         <div class="disclaimer">
                             <h4>Ten en cuenta</h4>
-                            <p>Este es un <strong>estimado referencial</strong>. El valor final puede variar segun el estado actual de tu espacio, acceso, ubicacion y requerimientos tecnicos especificos.</p>
+                            <p>Este es un <strong>estimado referencial</strong>. El valor final puede variar segun el estado de tu espacio y requerimientos especificos.</p>
                         </div>
                         <div class="cta-section">
-                            <p>Te gustaria una cotizacion exacta para tu proyecto?</p>
-                            <a href="https://calendly.com/d/cpy7-tt6-b65/quiero-transformar-mi-espacio-con-espacial" class="btn-cta" target="_blank">AGENDA TU LLAMADA GRATUITA</a>
+                            <p>Quieres una cotizacion exacta?</p>
+                            <a href="https://calendly.com/d/cpy7-tt6-b65/quiero-transformar-mi-espacio-con-espacial" class="btn-cta" target="_blank">AGENDAR LLAMADA</a>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- SLIDE 13: Contact CTA -->
-            <section class="slide-contact" data-background-image="images/backgrounds/contact-bg.jpg" data-background-opacity="0.7">
-                <div class="contact-content">
-                    <h2>ESTAMOS LISTAS<br>PARA <strong>HACER TU PROYECTO<br>REALIDAD</strong></h2>
-                    <p class="contact-question italic">Cuando empezamos?</p>
-                    <div class="contact-info">
-                        <div class="contact-person">
-                            <strong>MELISSA DEL VALLE</strong><br>
-                            +57 317 736 52 70
-                        </div>
-                        <div class="contact-person">
-                            <strong>MARIANA SANIN</strong><br>
-                            +57 320 704 49 45
-                        </div>
-                    </div>
-                    <div class="contact-social">
-                        <p>@ESPACIAL.ESTUDIO</p>
-                        <p>WWW.ESPACIALESTUDIO.COM</p>
-                    </div>
-                    <a href="https://calendly.com/d/cpy7-tt6-b65/quiero-transformar-mi-espacio-con-espacial" class="btn-contact" target="_blank">AGENDAR LLAMADA</a>
-                </div>
-            </section>
-
         </div>
     </div>
 
@@ -498,12 +560,14 @@
             controls: true,
             progress: true,
             center: true,
-            transition: 'slide',
-            width: 1200,
-            height: 700,
-            margin: 0.04,
-            minScale: 0.2,
-            maxScale: 2.0
+            transition: 'fade',
+            transitionSpeed: 'slow',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            minScale: 1,
+            maxScale: 1,
+            backgroundTransition: 'fade'
         });
     </script>
 </body>
