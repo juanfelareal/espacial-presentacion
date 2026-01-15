@@ -31,53 +31,51 @@
         /* Sofá inferior (L shape) - viene desde abajo */
         .sofa-bottom {
             fill: #fff;
-            animation: slideFromBottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation: loopFromBottom 4s ease-in-out infinite;
         }
 
         /* Sofá medio - viene desde la derecha */
         .sofa-middle {
             fill: #fff;
-            animation: slideFromRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            animation-delay: 0.15s;
+            animation: loopFromRight 4s ease-in-out infinite;
         }
 
         /* Sofá superior - viene desde arriba */
         .sofa-top {
             fill: #fff;
-            animation: slideFromTop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            animation-delay: 0.3s;
+            animation: loopFromTop 4s ease-in-out infinite;
         }
 
-        @keyframes slideFromBottom {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        @keyframes loopFromBottom {
+            0%, 100% {
+                transform: translateY(25px);
+                opacity: 0.3;
             }
-            to {
-                opacity: 1;
+            35%, 65% {
                 transform: translateY(0);
+                opacity: 1;
             }
         }
 
-        @keyframes slideFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
+        @keyframes loopFromRight {
+            0%, 100% {
+                transform: translateX(25px);
+                opacity: 0.3;
             }
-            to {
-                opacity: 1;
+            35%, 65% {
                 transform: translateX(0);
+                opacity: 1;
             }
         }
 
-        @keyframes slideFromTop {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
+        @keyframes loopFromTop {
+            0%, 100% {
+                transform: translateY(-25px);
+                opacity: 0.3;
             }
-            to {
-                opacity: 1;
+            35%, 65% {
                 transform: translateY(0);
+                opacity: 1;
             }
         }
 
@@ -117,26 +115,6 @@
             transition: filter 0.3s ease;
         }
 
-        /* Botón replay */
-        .replay-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 12px 24px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: #fff;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .replay-btn:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
         /* Versión oscura (toggle) */
         body.light {
             background: #f8f5f0;
@@ -152,12 +130,6 @@
 
         body.light .logo-container:hover .icon-group {
             filter: drop-shadow(0 0 8px rgba(26,74,74,0.3));
-        }
-
-        body.light .replay-btn {
-            background: rgba(26,74,74,0.1);
-            border-color: rgba(26,74,74,0.3);
-            color: #1a4a4a;
         }
 
         .toggle-bg {
@@ -218,19 +190,6 @@
         </svg>
     </div>
 
-    <button class="toggle-bg" onclick="toggleBackground()">Cambiar fondo</button>
-    <button class="replay-btn" onclick="replayAnimation()">Repetir</button>
-
-    <script>
-        function replayAnimation() {
-            const svg = document.getElementById('logo-animado');
-            const clone = svg.cloneNode(true);
-            svg.parentNode.replaceChild(clone, svg);
-        }
-
-        function toggleBackground() {
-            document.body.classList.toggle('light');
-        }
-    </script>
+    <button class="toggle-bg" onclick="document.body.classList.toggle('light')">Cambiar fondo</button>
 </body>
 </html>
