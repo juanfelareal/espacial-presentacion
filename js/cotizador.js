@@ -3,7 +3,7 @@
 // Precios actualizados 2026 (Brochure)
 // ============================================
 
-// Precios de DISENO por numero de espacios (Brochure 2026)
+// Precios de DISEÑO por número de espacios (Brochure 2026)
 const PRECIOS_DISENO = {
     1: 2800000,
     2: 5200000,
@@ -17,7 +17,7 @@ const PRECIOS_DISENO = {
     10: 13650000
 };
 
-// Precios por tipo de espacio para MATERIALIZACION
+// Precios por tipo de espacio para MATERIALIZACIÓN
 const PRECIOS_MATERIALIZACION = {
     cocina: {
         basico: 25000000,
@@ -71,24 +71,34 @@ const PRECIOS_MATERIALIZACION = {
     }
 };
 
-// Tipos de espacio disponibles
+// Tipos de espacio disponibles (con tildes y eñes)
 const TIPOS_ESPACIO = [
     { value: 'cocina', label: 'Cocina' },
-    { value: 'bano', label: 'Bano' },
+    { value: 'bano', label: 'Baño' },
     { value: 'sala', label: 'Sala' },
     { value: 'comedor', label: 'Comedor' },
-    { value: 'habitacion_principal', label: 'Habitacion Principal' },
-    { value: 'habitacion_auxiliar', label: 'Habitacion Auxiliar' },
-    { value: 'habitacion_ninos', label: 'Habitacion Ninos' },
+    { value: 'habitacion_principal', label: 'Habitación Principal' },
+    { value: 'habitacion_auxiliar', label: 'Habitación Auxiliar' },
+    { value: 'habitacion_ninos', label: 'Habitación Niños' },
     { value: 'estudio', label: 'Estudio/Oficina' },
-    { value: 'terraza', label: 'Terraza/Balcon' },
+    { value: 'terraza', label: 'Terraza/Balcón' },
     { value: 'especial', label: 'Espacio Especial' }
 ];
 
-// Variacion para rangos (+/- 15%)
+// Variación para rangos (+/- 15%)
 const VARIACION = 0.15;
 
 let espacioCounter = 0;
+
+// Mapeo de valores antiguos a nuevos (para compatibilidad con caché)
+function normalizarAcabados(valor) {
+    const mapeo = {
+        'estandar': 'basico',
+        'premium': 'medio',
+        'lujo': 'alto'
+    };
+    return mapeo[valor] || valor;
+}
 
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', function() {
@@ -114,8 +124,8 @@ function agregarEspacio(tipo = '', metros = '') {
         <select name="tipo-espacio" required>
             ${optionsHtml}
         </select>
-        <input type="number" name="metros-espacio" placeholder="m2" min="1" max="200" value="${metros}">
-        <button type="button" class="btn-remove" onclick="eliminarEspacio(${espacioCounter})">x</button>
+        <input type="number" name="metros-espacio" placeholder="m²" min="1" max="200" value="${metros}">
+        <button type="button" class="btn-remove" onclick="eliminarEspacio(${espacioCounter})">×</button>
     `;
 
     container.appendChild(row);
@@ -163,13 +173,13 @@ function calcularCotizacion() {
     }
 
     if (!email || !email.includes('@')) {
-        alert('Por favor ingresa un correo electronico valido.');
+        alert('Por favor ingresa un correo electrónico válido.');
         document.getElementById('lead-email').focus();
         return;
     }
 
     if (!celular || celular.length < 7) {
-        alert('Por favor ingresa tu numero de celular.');
+        alert('Por favor ingresa tu número de celular.');
         document.getElementById('lead-celular').focus();
         return;
     }
@@ -196,18 +206,19 @@ function calcularCotizacion() {
         return;
     }
 
-    // Obtener nivel de acabados
+    // Obtener nivel de acabados (con compatibilidad para valores antiguos)
     const acabadosInput = document.querySelector('input[name="acabados"]:checked');
-    const acabados = acabadosInput ? acabadosInput.value : 'basico';
+    const acabadosRaw = acabadosInput ? acabadosInput.value : 'basico';
+    const acabados = normalizarAcabados(acabadosRaw);
 
-    // Calcular costo de MATERIALIZACION por espacio
+    // Calcular costo de MATERIALIZACIÓN por espacio
     let costoMaterializacion = 0;
     const desglose = [];
 
     espacios.forEach(esp => {
         const precioBase = PRECIOS_MATERIALIZACION[esp.tipo]?.[acabados] || PRECIOS_MATERIALIZACION.especial[acabados];
 
-        // Ajustar por metros si es diferente al promedio (15m2 promedio por espacio)
+        // Ajustar por metros si es diferente al promedio (15m² promedio por espacio)
         const metrosPromedio = 15;
         let ajusteMetros = 1;
         if (esp.metros > 0) {
@@ -225,26 +236,26 @@ function calcularCotizacion() {
         });
     });
 
-    // Calcular costo de DISENO (precios brochure 2026)
+    // Calcular costo de DISEÑO (precios brochure 2026)
     const numEspacios = Math.min(espacios.length, 10);
     const costoDiseno = PRECIOS_DISENO[numEspacios] || PRECIOS_DISENO[10];
 
-    // Rango de materializacion (solo materializacion, con variacion)
+    // Rango de materialización (solo materialización, con variación)
     const matMin = Math.round(costoMaterializacion * (1 - VARIACION));
     const matMax = Math.round(costoMaterializacion * (1 + VARIACION));
 
-    // Actualizar UI - DISENO (principal, destacado)
+    // Actualizar UI - DISEÑO (principal, destacado)
     document.getElementById('costo-diseno-principal').textContent = formatCOP(costoDiseno);
 
-    // Actualizar UI - MATERIALIZACION (secundario, estimado)
+    // Actualizar UI - MATERIALIZACIÓN (secundario, estimado)
     document.getElementById('valor-min').textContent = formatCOP(matMin);
     document.getElementById('valor-max').textContent = formatCOP(matMax);
 
-    // Desglose de espacios (materializacion)
+    // Desglose de espacios (materialización)
     const desgloseContainer = document.getElementById('desglose-espacios');
     desgloseContainer.innerHTML = '';
     desglose.forEach(item => {
-        const metrosText = item.metros > 0 ? ` (${item.metros}m2)` : '';
+        const metrosText = item.metros > 0 ? ` (${item.metros}m²)` : '';
         desgloseContainer.innerHTML += `
             <div class="breakdown-item">
                 <span>${item.nombre}${metrosText}</span>
@@ -253,10 +264,10 @@ function calcularCotizacion() {
         `;
     });
 
-    // Explicacion
-    const acabadosText = acabados === 'basico' ? 'basico' : acabados === 'medio' ? 'medio' : 'alto';
+    // Explicación
+    const acabadosText = acabados === 'basico' ? 'básico' : acabados === 'medio' ? 'medio' : 'alto';
     document.getElementById('resultado-explicacion').textContent =
-        `${espacios.length} espacio${espacios.length > 1 ? 's' : ''} con acabados ${acabadosText}`;
+        `${espacios.length} espacio${espacios.length > 1 ? 's' : ''} con nivel de intervención ${acabadosText}`;
 
     // Log lead (para futuro webhook)
     console.log('Nuevo Lead Espacial:', {
