@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espacial Estudio | Interiorismo & Arquitectura</title>
+    <title>Cotizador | Espacial Estudio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
     <style>
         :root {
             --teal-dark: #1a4a4a;
@@ -31,56 +30,17 @@
         body {
             font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--beige-light);
-        }
-
-        .reveal {
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .reveal .slides {
-            background-color: var(--beige-light);
-        }
-
-        .reveal .slides section {
-            padding: 0;
-            background-color: var(--beige-light);
-        }
-
-        /* Image slides - full screen */
-        .slide-image {
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--beige-light);
-            width: 100%;
-            height: 100%;
-        }
-
-        .slide-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        /* Cotizador slide - enable scrolling */
-        .slide-cotizador {
-            background-color: var(--white);
-            overflow-y: auto !important;
-            padding: 40px 20px !important;
-            display: block !important;
-            height: 100% !important;
-        }
-
-        .reveal .slides section.slide-cotizador {
-            overflow-y: auto !important;
-            height: 100% !important;
-            top: 0 !important;
-            padding-bottom: 80px !important;
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
         .cotizador-container {
             max-width: 600px;
             margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .cotizador-title {
@@ -277,14 +237,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .results-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            text-align: center;
-            color: var(--teal-dark);
-            margin-bottom: 15px;
-        }
-
         .main-result {
             background: linear-gradient(135deg, var(--teal-dark), var(--teal-medium));
             border-radius: 10px;
@@ -336,25 +288,12 @@
             border-bottom: none;
         }
 
-        .breakdown-item.total {
-            margin-top: 8px;
-            padding-top: 12px;
-            border-top: 2px solid var(--border-light);
-            font-weight: 600;
-        }
-
         .disclaimer {
             background-color: var(--terracotta-light);
             border-left: 3px solid var(--terracotta);
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 15px;
-        }
-
-        .disclaimer h4 {
-            font-size: 0.85rem;
-            color: var(--teal-dark);
-            margin-bottom: 4px;
         }
 
         .disclaimer p {
@@ -390,7 +329,6 @@
             background-color: var(--teal-medium);
         }
 
-        /* Design result - principal */
         .design-result {
             background: linear-gradient(135deg, var(--terracotta), #d4a88a) !important;
         }
@@ -401,7 +339,6 @@
             margin-top: 5px;
         }
 
-        /* Payment section */
         .payment-section {
             background-color: var(--beige-light);
             border-radius: 8px;
@@ -458,7 +395,6 @@
             color: var(--teal-dark);
         }
 
-        /* Materializacion section */
         .materializacion-section {
             background-color: var(--white);
             border: 1px solid var(--border-light);
@@ -510,390 +446,146 @@
             line-height: 1.5;
         }
 
-        /* Navigation styling */
-        .reveal .controls {
+        /* Logo header */
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-logo a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
             color: var(--teal-dark);
+            text-decoration: none;
         }
 
-        .reveal .progress {
-            background: var(--beige-medium);
-            height: 4px;
-        }
-
-        .reveal .progress span {
-            background: var(--terracotta);
-        }
-
-        /* Slide counter */
-        .slide-number {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            z-index: 100;
-        }
-
-        /* ==========================================
-           RESPONSIVE - Mobile Landscape
-           ========================================== */
-
-        /* Mobile landscape (height < 500px and width > height) */
-        @media screen and (max-height: 500px) and (orientation: landscape) {
-            .slide-image {
-                padding: 5px;
-            }
-
-            .slide-image img {
-                max-height: 95vh;
-                max-width: 95vw;
-                object-fit: contain;
-            }
-
-            /* Cotizador en landscape móvil */
-            .slide-cotizador {
-                padding: 15px 20px !important;
-            }
-
-            .reveal .slides section.slide-cotizador {
-                padding-bottom: 40px !important;
+        /* Responsive */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 20px 15px;
             }
 
             .cotizador-container {
-                max-width: 90%;
-            }
-
-            .cotizador-title {
-                font-size: 1.4rem;
-                margin-bottom: 4px;
-            }
-
-            .cotizador-subtitle {
-                font-size: 0.8rem;
-                margin-bottom: 12px;
-            }
-
-            .form-section {
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-            }
-
-            .section-title {
-                font-size: 0.9rem;
-                margin-bottom: 5px;
-            }
-
-            .step-num {
-                width: 20px;
-                height: 20px;
-                font-size: 0.7rem;
-            }
-
-            .section-hint {
-                font-size: 0.7rem;
-                margin-bottom: 8px;
-            }
-
-            /* Espacios en grid horizontal */
-            .espacios-container {
-                gap: 5px;
-                margin-bottom: 8px;
-            }
-
-            .espacio-row {
-                padding: 5px;
-                gap: 5px;
-            }
-
-            .espacio-row select,
-            .espacio-row input {
-                padding: 5px;
-                font-size: 0.75rem;
-            }
-
-            .btn-remove {
-                width: 22px;
-                height: 22px;
-                font-size: 0.85rem;
-            }
-
-            .btn-add {
-                padding: 6px;
-                font-size: 0.75rem;
-            }
-
-            /* Radio options en fila */
-            .radio-options {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 5px;
-            }
-
-            .radio-card {
-                flex: 1;
-                min-width: 120px;
-                padding: 6px 8px;
-                font-size: 0.75rem;
-            }
-
-            .radio-content span {
-                font-size: 0.65rem;
-            }
-
-            /* Campos de contacto en fila */
-            .form-fields {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .form-fields input {
-                flex: 1;
-                min-width: 150px;
-                padding: 8px;
-                font-size: 0.8rem;
-            }
-
-            .btn-calculate {
-                padding: 10px;
-                font-size: 0.85rem;
-                margin-top: 10px;
-            }
-
-            /* Resultados compactos */
-            .cotizador-results {
-                margin-top: 15px;
-            }
-
-            .main-result {
-                padding: 12px;
-                margin-bottom: 10px;
-            }
-
-            .result-label {
-                font-size: 0.7rem;
-                margin-bottom: 4px;
-            }
-
-            .result-value {
-                font-size: 1.4rem;
-            }
-
-            .result-subtitle {
-                font-size: 0.75rem;
-            }
-
-            .result-explanation {
-                font-size: 0.7rem;
-            }
-
-            .payment-section {
-                padding: 10px;
-                margin-bottom: 10px;
-            }
-
-            .payment-section h4 {
-                font-size: 0.8rem;
-            }
-
-            .payment-note {
-                font-size: 0.65rem;
-                margin-bottom: 6px;
-            }
-
-            .payment-options {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 5px;
-            }
-
-            .payment-option {
-                flex: 1;
-                min-width: 140px;
-                padding: 5px 8px;
-                font-size: 0.7rem;
-            }
-
-            .payment-option .discount {
-                padding: 2px 5px;
-                font-size: 0.6rem;
-            }
-
-            .materializacion-section {
-                padding: 10px;
-                margin-bottom: 10px;
-            }
-
-            .materializacion-section h4 {
-                font-size: 0.8rem;
-            }
-
-            .materializacion-value {
-                font-size: 1.1rem;
-                margin-bottom: 3px;
-            }
-
-            .materializacion-note {
-                font-size: 0.65rem;
-                margin-bottom: 8px;
-            }
-
-            .materializacion-section .breakdown-section {
-                padding: 8px;
-                margin-bottom: 8px;
-            }
-
-            .materializacion-section .breakdown-section h5 {
-                font-size: 0.7rem;
-                margin-bottom: 5px;
-            }
-
-            .breakdown-item {
-                padding: 4px 0;
-                font-size: 0.75rem;
-            }
-
-            .materializacion-section .disclaimer p {
-                font-size: 0.6rem;
-            }
-
-            .cta-section {
-                padding-top: 10px;
-            }
-
-            .cta-section p {
-                font-size: 0.9rem;
-                margin-bottom: 8px;
-            }
-
-            .btn-cta {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-
-            /* Ocultar controles de reveal en landscape móvil para más espacio */
-            .reveal .controls {
-                transform: scale(0.7);
-            }
-
-            .reveal .progress {
-                height: 3px;
-            }
-        }
-
-        /* Tablets y pantallas medianas */
-        @media screen and (max-width: 768px) and (orientation: portrait) {
-            .cotizador-container {
-                max-width: 95%;
+                padding: 20px;
             }
 
             .cotizador-title {
                 font-size: 1.8rem;
             }
-        }
-
-        /* Móvil pequeño portrait */
-        @media screen and (max-width: 400px) {
-            .cotizador-title {
-                font-size: 1.6rem;
-            }
 
             .espacio-row {
                 grid-template-columns: 1fr 60px 28px;
-            }
-
-            .radio-card {
-                padding: 8px;
-            }
-
-            .radio-content span {
-                font-size: 0.7rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="reveal">
-        <div class="slides">
-            <!-- Slide 1: Cover -->
-            <section class="slide-image">
-                <img src="images/slides/slide-01.webp" alt="Espacial Estudio - Cover">
-            </section>
+    <div class="cotizador-container">
+        <div class="header-logo">
+            <a href="index.html">ESPACIAL ESTUDIO</a>
+        </div>
 
-            <!-- Slide 2: Team Intro -->
-            <section class="slide-image">
-                <img src="images/slides/slide-02.webp" alt="Transformamos vidas">
-            </section>
+        <h2 class="cotizador-title">Calcula tu inversión</h2>
+        <p class="cotizador-subtitle">Obtén un estimado para transformar tu espacio</p>
 
-            <!-- Slide 3: Services -->
-            <section class="slide-image">
-                <img src="images/slides/slide-03.webp" alt="2 Servicios">
-            </section>
+        <div class="cotizador-form" id="cotizador-form">
+            <div class="form-section">
+                <h3 class="section-title"><span class="step-num">1</span> ¿Qué espacios quieres transformar?</h3>
+                <p class="section-hint">Agrega cada espacio con su tipo y metros cuadrados</p>
+                <div class="espacios-container" id="espacios-container"></div>
+                <button type="button" class="btn-add" onclick="agregarEspacio()">+ Agregar otro espacio</button>
+            </div>
 
-            <!-- Slide 4: Process -->
-            <section class="slide-image">
-                <img src="images/slides/slide-04.webp" alt="4 Pasos">
-            </section>
+            <div class="form-section">
+                <h3 class="section-title"><span class="step-num">2</span> Nivel de intervención</h3>
+                <p class="section-hint">¿Qué nivel de intervención necesitas?</p>
+                <div class="radio-options">
+                    <label class="radio-card">
+                        <input type="radio" name="acabados" value="basico" checked>
+                        <span class="radio-content">
+                            <strong>Básico</strong>
+                            <span>Acabados estándar, mobiliario por reutilizar. Poca obra civil.</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="acabados" value="medio">
+                        <span class="radio-content">
+                            <strong>Medio</strong>
+                            <span>Diseño más completo, mobiliario nuevo, obra civil media (pintura, luces).</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="acabados" value="alto">
+                        <span class="radio-content">
+                            <strong>Alto</strong>
+                            <span>Reforma total: pisos, muros, iluminación, todo nuevo o de alta gama.</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
 
-            <!-- Slide 5: Timeline -->
-            <section class="slide-image">
-                <img src="images/slides/slide-05.webp" alt="Timeline">
-            </section>
+            <div class="form-section">
+                <h3 class="section-title"><span class="step-num">3</span> Tus datos de contacto</h3>
+                <div class="form-fields">
+                    <input type="text" id="lead-nombre" placeholder="Nombre completo *" required>
+                    <input type="email" id="lead-email" placeholder="Correo electrónico *" required>
+                    <input type="tel" id="lead-celular" placeholder="Número de celular *" required>
+                </div>
+            </div>
 
-            <!-- Slide 6: Pricing Intro -->
-            <section class="slide-image">
-                <img src="images/slides/slide-06.webp" alt="Precios - Intro">
-            </section>
+            <button class="btn-calculate" onclick="calcularCotizacion()">VER MI ESTIMADO</button>
+        </div>
 
-            <!-- Slide 7: Pricing 1-5 -->
-            <section class="slide-image">
-                <img src="images/slides/slide-07.webp" alt="Precios 1-5 espacios">
-            </section>
+        <div class="cotizador-results" id="cotizador-results" style="display: none;">
+            <div class="main-result design-result">
+                <p class="result-label">VALOR PARA INICIAR TU PROYECTO</p>
+                <p class="result-value" id="costo-diseno-principal">$0</p>
+                <p class="result-subtitle">Diseño Interior</p>
+                <p class="result-explanation">Este es el valor que debes pagar para iniciar tu proyecto de diseño</p>
+            </div>
 
-            <!-- Slide 8: Pricing 6-10 -->
-            <section class="slide-image">
-                <img src="images/slides/slide-08.webp" alt="Precios 6-10 espacios">
-            </section>
+            <div class="payment-section">
+                <h4>Formas de Pago</h4>
+                <p class="payment-note">Descuentos aplican al agendar llamada con nuestro equipo</p>
+                <div class="payment-options">
+                    <div class="payment-option highlight">
+                        <span class="discount">10% dcto</span>
+                        <span>Pago 100% en las 24 horas después de la llamada</span>
+                    </div>
+                    <div class="payment-option">
+                        <span class="discount">5% dcto</span>
+                        <span>Pago 100% del proyecto</span>
+                    </div>
+                    <div class="payment-option">
+                        <span class="discount">Sin dcto</span>
+                        <span>50% inicio + 30% renders + 20% presupuesto</span>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Slide 9: Team -->
-            <section class="slide-image">
-                <img src="images/slides/slide-09.webp" alt="Nuestro equipo">
-            </section>
+            <div class="materializacion-section">
+                <h4>Estimado de Materialización</h4>
+                <p class="materializacion-value"><span id="valor-min">$0</span> a <span id="valor-max">$0</span></p>
+                <p class="materializacion-note" id="resultado-explicacion"></p>
 
-            <!-- Slide 10: Testimonials -->
-            <section class="slide-image">
-                <img src="images/slides/slide-10.webp" alt="Testimonios">
-            </section>
+                <div class="breakdown-section">
+                    <h5>Desglose por espacio:</h5>
+                    <div id="desglose-espacios"></div>
+                </div>
 
-            <!-- Slide 11: Fine Print -->
-            <section class="slide-image">
-                <img src="images/slides/slide-11.webp" alt="La letra pequena">
-            </section>
+                <div class="disclaimer">
+                    <p><strong>Importante:</strong> Este valor de materialización es un aproximado basado en nuestra experiencia con proyectos similares. Cada proyecto es único y el presupuesto final de materialización se define después del proceso de diseño. No podemos comprometernos con este valor hasta no hacer un análisis detallado de tu espacio.</p>
+                </div>
+            </div>
 
-            <!-- Slide 12: Contact -->
-            <section class="slide-image">
-                <img src="images/slides/slide-12.webp" alt="Contacto">
-            </section>
-
+            <div class="cta-section">
+                <p>¿Tienes dudas? Agenda una llamada gratuita</p>
+                <a href="https://calendly.com/d/cpy7-tt6-b65/quiero-transformar-mi-espacio-con-espacial" class="btn-cta" target="_blank">AGENDAR LLAMADA</a>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
-    <script>
-        Reveal.initialize({
-            hash: true,
-            controls: true,
-            progress: true,
-            center: false,
-            transition: 'fade',
-            transitionSpeed: 'slow',
-            width: '100%',
-            height: '100%',
-            margin: 0,
-            minScale: 1,
-            maxScale: 1,
-            backgroundTransition: 'fade'
-        });
-    </script>
+    <script src="js/cotizador.js"></script>
 </body>
 </html>
