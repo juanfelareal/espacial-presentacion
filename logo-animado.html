@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espacial Estudio - Logo Animado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a4a4a 0%, #2d5f5f 100%);
+        }
+
+        .logo-container {
+            width: 90%;
+            max-width: 500px;
+        }
+
+        /* ==========================================
+           ANIMACIONES
+           ========================================== */
+
+        /* Icono E - dibujado con stroke */
+        .icon-part {
+            fill: transparent;
+            stroke: #fff;
+            stroke-width: 1;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawIcon 1.2s ease-out forwards;
+        }
+
+        .icon-part:nth-child(1) { animation-delay: 0s; }
+        .icon-part:nth-child(2) { animation-delay: 0.15s; }
+        .icon-part:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes drawIcon {
+            to {
+                stroke-dashoffset: 0;
+                fill: #fff;
+            }
+        }
+
+        /* Texto principal "Espacial" */
+        .main-text {
+            fill: #fff;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeSlideUp 0.8s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        /* Texto "ESTUDIO" */
+        .sub-text {
+            fill: #fff;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+            animation-delay: 1.3s;
+        }
+
+        @keyframes fadeSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Efecto hover suave */
+        .logo-container:hover .icon-part {
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+        }
+
+        /* Botón replay */
+        .replay-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .replay-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Versión oscura (toggle) */
+        body.light {
+            background: #f8f5f0;
+        }
+
+        body.light .icon-part {
+            stroke: #1a4a4a;
+        }
+
+        body.light .icon-part,
+        body.light .main-text,
+        body.light .sub-text {
+            fill: #1a4a4a;
+        }
+
+        body.light .replay-btn {
+            background: rgba(26,74,74,0.1);
+            border-color: rgba(26,74,74,0.3);
+            color: #1a4a4a;
+        }
+
+        .toggle-bg {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.light .toggle-bg {
+            background: rgba(26,74,74,0.1);
+            border-color: rgba(26,74,74,0.3);
+            color: #1a4a4a;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="logo-container">
+        <svg id="logo-animado" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154.72 92.68">
+            <!-- Icono E (animado con stroke) -->
+            <g class="icon-group">
+                <polygon class="icon-part" points="73.31 22.71 69.74 22.71 69.74 36.99 85.05 36.99 85.05 33.43 73.31 33.43 73.31 22.71"/>
+                <polygon class="icon-part" points="77.25 19.16 77.25 22.71 81.46 22.71 81.46 26.36 77.25 26.36 77.25 29.83 81.46 29.83 81.46 29.83 84.98 29.83 84.98 27.88 84.98 26.36 84.98 19.16 77.25 19.16"/>
+                <polygon class="icon-part" points="73.26 15.52 81.14 15.52 81.14 12 69.78 12 69.78 19.14 73.26 19.14 73.26 15.52"/>
+            </g>
+
+            <!-- Texto principal "Espacial" -->
+            <g class="main-text">
+                <path d="M60.6,57.37c0,4.36-2.74,7.35-6.91,7.35-2.33,0-4.09-.93-5.16-2.63v7.84h-3.15v-19.91h3.15v2.52c1.07-1.7,2.82-2.63,5.1-2.63,4.14,0,6.97,3.02,6.97,7.46ZM57.42,57.26c0-2.71-1.84-4.72-4.44-4.72s-4.44,1.97-4.44,4.72,1.84,4.77,4.44,4.77,4.44-1.97,4.44-4.77Z"/>
+                <path d="M73.96,62.93v-.1c-1.04,1.29-2.71,1.92-4.83,1.92-3.15,0-5.13-1.95-5.13-4.52s2-4.36,5.51-4.39h4.42v-.44c0-1.84-1.18-2.93-3.48-2.93-1.4,0-2.85.49-4.31,1.48l-1.29-2.19c2.03-1.21,3.51-1.84,6.28-1.84,3.76,0,5.87,1.92,5.9,5.13l.03,7.89h-3.1ZM73.93,59.48v-1.34h-3.95c-2.06,0-3.02.55-3.02,1.95,0,1.32,1.07,2.17,2.82,2.17,2.25,0,3.98-1.18,4.14-2.77Z"/>
+                <path d="M88.72,52.68c-2.52,0-4.33,1.89-4.33,4.66s1.81,4.66,4.33,4.66c1.84,0,3.32-.6,4.31-1.76l1.76,1.76c-1.32,1.73-3.43,2.71-6.2,2.71-4.33,0-7.35-2.99-7.35-7.38s3.02-7.43,7.35-7.43c2.63,0,4.69.85,6.03,2.39l-1.73,2.03c-1.01-1.04-2.41-1.67-4.17-1.65Z"/>
+                <path d="M104.05,45.86c0,1.07-.8,1.86-1.84,1.86s-1.84-.8-1.84-1.86.8-1.89,1.84-1.89,1.84.8,1.84,1.89ZM103.78,50.02v14.59h-3.13v-14.59h3.13Z"/>
+                <path d="M119.26,62.93v-.1c-1.04,1.29-2.71,1.92-4.83,1.92-3.15,0-5.13-1.95-5.13-4.52s2-4.36,5.51-4.39h4.42v-.44c0-1.84-1.18-2.93-3.48-2.93-1.4,0-2.85.49-4.31,1.48l-1.29-2.19c2.03-1.21,3.51-1.84,6.28-1.84,3.76,0,5.87,1.92,5.9,5.13l.03,7.89h-3.1ZM119.24,59.48v-1.34h-3.95c-2.06,0-3.02.55-3.02,1.95,0,1.32,1.07,2.17,2.82,2.17,2.25,0,3.98-1.18,4.14-2.77Z"/>
+                <polygon points="17.08 62.31 17.08 58.58 22.05 58.58 22.05 56.05 17.08 56.05 17.08 52.39 27.05 52.39 27.05 49.83 14.21 49.83 14.21 64.87 30.71 64.87 30.71 62.31 17.08 62.31"/>
+                <polygon points="130.12 62.31 140.51 62.31 140.51 64.87 127.25 64.87 127.25 50.09 130.05 50.09 130.12 62.31"/>
+                <path d="M34.02,53.86c0-1.04.9-1.45,2.14-1.45s2.91.49,4.2,1.29l1.15-2.33c-1.32-.93-3.26-1.48-5.1-1.48-2.8,0-5.37,1.26-5.37,4.22-.03,5.27,7.65,3.59,7.65,6.58,0,1.1-1.04,1.56-2.39,1.56-.11,0-.22,0-.33-.01v2.47c.07,0,.13,0,.2,0,2.93,0,5.59-1.34,5.59-4.33.03-5.29-7.73-3.84-7.73-6.53Z"/>
+            </g>
+
+            <!-- Texto "ESTUDIO" -->
+            <g class="sub-text">
+                <path d="M53.47,74.62v.64h-3.4v2.02h3.04v.63h-3.04v2.1h3.51v.64h-4.2v-6.03h4.09Z"/>
+                <path d="M59.84,75.27c-.78,0-1.28.31-1.28.83,0,1.57,3.39.75,3.39,2.94,0,1-.89,1.65-2.18,1.65-.88,0-1.74-.38-2.31-.92l.31-.59c.56.53,1.33.84,2.01.84.87,0,1.41-.35,1.41-.94,0-1.61-3.39-.76-3.39-2.92,0-.95.84-1.55,2.08-1.55.7,0,1.41.22,1.91.56l-.29.61c-.54-.35-1.18-.5-1.66-.5Z"/>
+                <path d="M70.26,74.62v.64h-1.97v5.39h-.69v-5.39h-1.96v-.64h4.63Z"/>
+                <path d="M76.77,80.05c1.15,0,1.84-.69,1.84-1.88v-3.55h.69v3.55c0,1.58-.95,2.51-2.52,2.51s-2.54-.93-2.54-2.51v-3.55h.69v3.55c0,1.19.71,1.88,1.85,1.88Z"/>
+                <path d="M89.62,77.64c0,1.71-1.35,3.02-3.13,3.02h-2.41v-6.03h2.44c1.76,0,3.1,1.3,3.1,3.02ZM88.92,77.64c0-1.36-1.07-2.39-2.42-2.39h-1.73v4.76h1.76c1.34,0,2.39-1.02,2.39-2.37Z"/>
+                <path d="M94.67,74.62v6.03h-.69v-6.03h.69Z"/>
+                <path d="M105.35,77.64c0,1.7-1.4,3.04-3.15,3.04s-3.16-1.34-3.16-3.04,1.4-3.03,3.16-3.03,3.15,1.34,3.15,3.03ZM99.73,77.64c0,1.34,1.12,2.41,2.46,2.41s2.45-1.08,2.45-2.41-1.1-2.39-2.45-2.39-2.46,1.06-2.46,2.39Z"/>
+            </g>
+        </svg>
+    </div>
+
+    <button class="toggle-bg" onclick="toggleBackground()">Cambiar fondo</button>
+    <button class="replay-btn" onclick="replayAnimation()">Repetir</button>
+
+    <script>
+        function replayAnimation() {
+            const svg = document.getElementById('logo-animado');
+            const clone = svg.cloneNode(true);
+            svg.parentNode.replaceChild(clone, svg);
+        }
+
+        function toggleBackground() {
+            document.body.classList.toggle('light');
+        }
+    </script>
+</body>
+</html>
