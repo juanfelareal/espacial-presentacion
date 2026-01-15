@@ -20,54 +20,54 @@ const PRECIOS_DISENO = {
 // Precios por tipo de espacio para MATERIALIZACION
 const PRECIOS_MATERIALIZACION = {
     cocina: {
-        estandar: 25000000,
-        premium: 40000000,
-        lujo: 60000000
+        basico: 25000000,
+        medio: 40000000,
+        alto: 60000000
     },
     bano: {
-        estandar: 12000000,
-        premium: 20000000,
-        lujo: 35000000
+        basico: 12000000,
+        medio: 20000000,
+        alto: 35000000
     },
     sala: {
-        estandar: 8000000,
-        premium: 15000000,
-        lujo: 25000000
+        basico: 8000000,
+        medio: 15000000,
+        alto: 25000000
     },
     comedor: {
-        estandar: 6000000,
-        premium: 12000000,
-        lujo: 20000000
+        basico: 6000000,
+        medio: 12000000,
+        alto: 20000000
     },
     habitacion_principal: {
-        estandar: 10000000,
-        premium: 18000000,
-        lujo: 30000000
+        basico: 10000000,
+        medio: 18000000,
+        alto: 30000000
     },
     habitacion_auxiliar: {
-        estandar: 6000000,
-        premium: 10000000,
-        lujo: 18000000
+        basico: 6000000,
+        medio: 10000000,
+        alto: 18000000
     },
     habitacion_ninos: {
-        estandar: 8000000,
-        premium: 14000000,
-        lujo: 22000000
+        basico: 8000000,
+        medio: 14000000,
+        alto: 22000000
     },
     estudio: {
-        estandar: 7000000,
-        premium: 12000000,
-        lujo: 20000000
+        basico: 7000000,
+        medio: 12000000,
+        alto: 20000000
     },
     terraza: {
-        estandar: 5000000,
-        premium: 10000000,
-        lujo: 18000000
+        basico: 5000000,
+        medio: 10000000,
+        alto: 18000000
     },
     especial: {
-        estandar: 10000000,
-        premium: 18000000,
-        lujo: 30000000
+        basico: 10000000,
+        medio: 18000000,
+        alto: 30000000
     }
 };
 
@@ -198,7 +198,7 @@ function calcularCotizacion() {
 
     // Obtener nivel de acabados
     const acabadosInput = document.querySelector('input[name="acabados"]:checked');
-    const acabados = acabadosInput ? acabadosInput.value : 'estandar';
+    const acabados = acabadosInput ? acabadosInput.value : 'basico';
 
     // Calcular costo de MATERIALIZACION por espacio
     let costoMaterializacion = 0;
@@ -254,7 +254,7 @@ function calcularCotizacion() {
     });
 
     // Explicacion
-    const acabadosText = acabados === 'estandar' ? 'estandar' : acabados === 'premium' ? 'premium' : 'de lujo';
+    const acabadosText = acabados === 'basico' ? 'basico' : acabados === 'medio' ? 'medio' : 'alto';
     document.getElementById('resultado-explicacion').textContent =
         `${espacios.length} espacio${espacios.length > 1 ? 's' : ''} con acabados ${acabadosText}`;
 

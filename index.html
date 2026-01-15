@@ -412,7 +412,14 @@
         .payment-section h4 {
             font-size: 0.9rem;
             color: var(--teal-dark);
+            margin-bottom: 5px;
+        }
+
+        .payment-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
             margin-bottom: 10px;
+            font-style: italic;
         }
 
         .payment-options {
@@ -607,27 +614,27 @@
 
                         <div class="form-section">
                             <h3 class="section-title"><span class="step-num">2</span> Nivel de acabados</h3>
-                            <p class="section-hint">Que calidad de materiales prefieres?</p>
+                            <p class="section-hint">Que nivel de intervencion necesitas?</p>
                             <div class="radio-options">
                                 <label class="radio-card">
-                                    <input type="radio" name="acabados" value="estandar" checked>
+                                    <input type="radio" name="acabados" value="basico" checked>
                                     <span class="radio-content">
-                                        <strong>Estandar</strong>
-                                        <span>Materiales de buena calidad, marcas nacionales.</span>
+                                        <strong>Basico</strong>
+                                        <span>Acabados estandar, mobiliario por reutilizar. Poca obra civil.</span>
                                     </span>
                                 </label>
                                 <label class="radio-card">
-                                    <input type="radio" name="acabados" value="premium">
+                                    <input type="radio" name="acabados" value="medio">
                                     <span class="radio-content">
-                                        <strong>Premium</strong>
-                                        <span>Alta gama, marcas nacionales e importadas.</span>
+                                        <strong>Medio</strong>
+                                        <span>Diseno mas completo, mobiliario nuevo, obra civil media (pintura, luces).</span>
                                     </span>
                                 </label>
                                 <label class="radio-card">
-                                    <input type="radio" name="acabados" value="lujo">
+                                    <input type="radio" name="acabados" value="alto">
                                     <span class="radio-content">
-                                        <strong>Lujo</strong>
-                                        <span>Materiales exclusivos, marcas de disenador.</span>
+                                        <strong>Alto</strong>
+                                        <span>Reforma total: pisos, muros, iluminacion, todo nuevo o de alta gama.</span>
                                     </span>
                                 </label>
                             </div>
@@ -657,10 +664,11 @@
                         <!-- FORMAS DE PAGO -->
                         <div class="payment-section">
                             <h4>Formas de Pago</h4>
+                            <p class="payment-note">Descuentos aplican al agendar llamada con nuestro equipo</p>
                             <div class="payment-options">
                                 <div class="payment-option highlight">
                                     <span class="discount">10% dcto</span>
-                                    <span>Pago 100% en las proximas 24 horas</span>
+                                    <span>Pago 100% en las 24 horas despues de la llamada</span>
                                 </div>
                                 <div class="payment-option">
                                     <span class="discount">5% dcto</span>
