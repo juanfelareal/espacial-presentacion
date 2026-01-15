@@ -263,8 +263,8 @@ function calcularCotizacion() {
         nombre, email, celular,
         espacios: desglose,
         acabados,
-        estimadoMin: costoMin,
-        estimadoMax: costoMax,
+        estimadoMin: matMin,
+        estimadoMax: matMax,
         costoDiseno,
         costoMaterializacion,
         fecha: new Date().toISOString()
