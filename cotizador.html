@@ -43,6 +43,19 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-logo a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: var(--teal-dark);
+            text-decoration: none;
+        }
+
         .cotizador-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
@@ -63,6 +76,12 @@
             margin-bottom: 20px;
             padding-bottom: 20px;
             border-bottom: 1px solid var(--border-light);
+        }
+
+        .form-section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
         }
 
         .section-title {
@@ -94,6 +113,82 @@
             margin-bottom: 12px;
         }
 
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-fields input,
+        .form-fields select {
+            padding: 12px 14px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            background-color: var(--beige-light);
+        }
+
+        .form-fields input:focus,
+        .form-fields select:focus {
+            outline: none;
+            border-color: var(--teal-dark);
+        }
+
+        /* Radio cards para tipo de proyecto */
+        .project-type-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .project-type-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+            background-color: var(--beige-light);
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .project-type-card input {
+            display: none;
+        }
+
+        .project-type-card:has(input:checked) {
+            border-color: var(--terracotta);
+            background-color: var(--terracotta-light);
+        }
+
+        .project-type-card .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .project-type-card .label {
+            font-weight: 600;
+            color: var(--teal-dark);
+        }
+
+        /* Secciones condicionales */
+        .conditional-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .conditional-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Espacios container (residencial) */
         .espacios-container {
             display: flex;
             flex-direction: column;
@@ -153,6 +248,7 @@
             border-color: var(--teal-dark);
         }
 
+        /* Radio options acabados */
         .radio-options {
             display: flex;
             flex-direction: column;
@@ -190,34 +286,36 @@
             color: var(--text-muted);
         }
 
-        .form-fields {
+        /* Checkboxes de consentimiento */
+        .consent-section {
+            margin-top: 15px;
+        }
+
+        .checkbox-row {
             display: flex;
-            flex-direction: column;
+            align-items: flex-start;
             gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
-        .form-fields input {
-            padding: 10px 12px;
-            border: 1px solid var(--border-light);
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            background-color: var(--beige-light);
+        .checkbox-row input[type="checkbox"] {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--terracotta);
         }
 
-        .form-fields input:focus {
-            outline: none;
-            border-color: var(--teal-dark);
-        }
-
+        /* Botones */
         .btn-calculate {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background-color: var(--terracotta);
             color: var(--white);
             border: none;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             margin-top: 15px;
@@ -227,14 +325,15 @@
             background-color: #b8907a;
         }
 
+        .btn-calculate:disabled {
+            background-color: var(--beige-medium);
+            cursor: not-allowed;
+        }
+
+        /* Resultados */
         .cotizador-results {
             margin-top: 25px;
             animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .main-result {
@@ -244,6 +343,10 @@
             text-align: center;
             color: var(--white);
             margin-bottom: 15px;
+        }
+
+        .main-result.design-result {
+            background: linear-gradient(135deg, var(--terracotta), #d4a88a);
         }
 
         .result-label {
@@ -257,86 +360,16 @@
             font-size: 1.8rem;
         }
 
-        .result-explanation {
-            font-size: 0.8rem;
-            opacity: 0.85;
-            margin-top: 8px;
-        }
-
-        .breakdown-section {
-            background-color: var(--beige-light);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .breakdown-section h4 {
-            font-size: 0.95rem;
-            color: var(--teal-dark);
-            margin-bottom: 12px;
-        }
-
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid var(--border-light);
-            font-size: 0.85rem;
-        }
-
-        .breakdown-item:last-child {
-            border-bottom: none;
-        }
-
-        .disclaimer {
-            background-color: var(--terracotta-light);
-            border-left: 3px solid var(--terracotta);
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 15px;
-        }
-
-        .disclaimer p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .cta-section {
-            text-align: center;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .cta-section p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: var(--teal-dark);
-            margin-bottom: 12px;
-        }
-
-        .btn-cta {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--teal-dark);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .btn-cta:hover {
-            background-color: var(--teal-medium);
-        }
-
-        .design-result {
-            background: linear-gradient(135deg, var(--terracotta), #d4a88a) !important;
-        }
-
         .result-subtitle {
             font-size: 0.85rem;
             opacity: 0.9;
             margin-top: 5px;
+        }
+
+        .result-explanation {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            margin-top: 8px;
         }
 
         .payment-section {
@@ -422,42 +455,91 @@
             margin-bottom: 12px;
         }
 
-        .materializacion-section .breakdown-section {
-            background: var(--beige-light);
-            margin-bottom: 12px;
+        .breakdown-section {
+            background-color: var(--beige-light);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
         }
 
-        .materializacion-section .breakdown-section h5 {
-            font-size: 0.8rem;
+        .breakdown-section h4,
+        .breakdown-section h5 {
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        .materializacion-section .disclaimer {
-            background: transparent;
-            border-left: none;
-            padding: 0;
-            margin: 0;
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.85rem;
         }
 
-        .materializacion-section .disclaimer p {
-            font-size: 0.7rem;
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .disclaimer {
+            background-color: var(--terracotta-light);
+            border-left: 3px solid var(--terracotta);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .disclaimer p {
+            font-size: 0.75rem;
             color: var(--text-muted);
             line-height: 1.5;
         }
 
-        /* Logo header */
-        .header-logo {
+        .cta-section {
             text-align: center;
-            margin-bottom: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-light);
         }
 
-        .header-logo a {
+        .cta-section p {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            letter-spacing: 4px;
+            font-size: 1.1rem;
             color: var(--teal-dark);
+            margin-bottom: 12px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--teal-dark);
+            color: var(--white);
             text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .btn-cta:hover {
+            background-color: var(--teal-medium);
+        }
+
+        .btn-recalculate {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: transparent;
+            color: var(--teal-dark);
+            border: 2px solid var(--teal-dark);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-recalculate:hover {
+            background-color: var(--beige-light);
         }
 
         /* Responsive */
@@ -472,6 +554,10 @@
 
             .cotizador-title {
                 font-size: 1.8rem;
+            }
+
+            .project-type-options {
+                grid-template-columns: 1fr;
             }
 
             .espacio-row {
@@ -490,51 +576,120 @@
         <p class="cotizador-subtitle">Obtén un estimado para transformar tu espacio</p>
 
         <div class="cotizador-form" id="cotizador-form">
+            <!-- Paso 1: Datos básicos -->
             <div class="form-section">
-                <h3 class="section-title"><span class="step-num">1</span> ¿Qué espacios quieres transformar?</h3>
-                <p class="section-hint">Agrega cada espacio con su tipo y metros cuadrados</p>
-                <div class="espacios-container" id="espacios-container"></div>
-                <button type="button" class="btn-add" onclick="agregarEspacio()">+ Agregar otro espacio</button>
-            </div>
-
-            <div class="form-section">
-                <h3 class="section-title"><span class="step-num">2</span> Nivel de intervención</h3>
-                <p class="section-hint">¿Qué nivel de intervención necesitas?</p>
-                <div class="radio-options">
-                    <label class="radio-card">
-                        <input type="radio" name="acabados" value="basico" checked>
-                        <span class="radio-content">
-                            <strong>Básico</strong>
-                            <span>Acabados estándar, mobiliario por reutilizar. Poca obra civil.</span>
-                        </span>
-                    </label>
-                    <label class="radio-card">
-                        <input type="radio" name="acabados" value="medio">
-                        <span class="radio-content">
-                            <strong>Medio</strong>
-                            <span>Diseño más completo, mobiliario nuevo, obra civil media (pintura, luces).</span>
-                        </span>
-                    </label>
-                    <label class="radio-card">
-                        <input type="radio" name="acabados" value="alto">
-                        <span class="radio-content">
-                            <strong>Alto</strong>
-                            <span>Reforma total: pisos, muros, iluminación, todo nuevo o de alta gama.</span>
-                        </span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3 class="section-title"><span class="step-num">3</span> Tus datos de contacto</h3>
+                <h3 class="section-title"><span class="step-num">1</span> Tus datos de contacto</h3>
                 <div class="form-fields">
-                    <input type="text" id="lead-nombre" placeholder="Nombre completo *" required>
-                    <input type="email" id="lead-email" placeholder="Correo electrónico *" required>
-                    <input type="tel" id="lead-celular" placeholder="Número de celular *" required>
+                    <input type="text" id="lead-nombre" placeholder="¿Cuál es tu nombre? *" required>
+                    <input type="tel" id="lead-celular" placeholder="¿Cuál es tu celular? *" required>
                 </div>
             </div>
 
-            <button class="btn-calculate" onclick="calcularCotizacion()">VER MI ESTIMADO</button>
+            <!-- Paso 2: Tipo de proyecto -->
+            <div class="form-section">
+                <h3 class="section-title"><span class="step-num">2</span> ¿Qué tipo de proyecto tienes?</h3>
+                <div class="project-type-options">
+                    <label class="project-type-card">
+                        <input type="radio" name="tipo-proyecto" value="residencial" checked>
+                        <span class="icon">🏠</span>
+                        <span class="label">Residencial</span>
+                    </label>
+                    <label class="project-type-card">
+                        <input type="radio" name="tipo-proyecto" value="comercial">
+                        <span class="icon">🏢</span>
+                        <span class="label">Comercial</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Sección COMERCIAL -->
+            <div id="section-comercial" class="conditional-section">
+                <div class="form-section">
+                    <h3 class="section-title"><span class="step-num">3</span> Información de tu negocio</h3>
+                    <div class="form-fields">
+                        <input type="text" id="comercial-nombre-negocio" placeholder="¿Cómo se llama tu negocio?">
+                        <input type="number" id="comercial-metros" placeholder="¿Cuántos m² tiene tu local?" min="1">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title"><span class="step-num">4</span> Nivel de acabados</h3>
+                    <div class="radio-options" id="acabados-comercial">
+                        <label class="radio-card">
+                            <input type="radio" name="acabados-comercial" value="basico" checked>
+                            <span class="radio-content">
+                                <strong>Básico</strong>
+                                <span>Acabados estándar, mobiliario por reutilizar. Poca obra civil.</span>
+                            </span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="acabados-comercial" value="medio">
+                            <span class="radio-content">
+                                <strong>Medio</strong>
+                                <span>Diseño más completo, mobiliario nuevo, obra civil media.</span>
+                            </span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="acabados-comercial" value="alto">
+                            <span class="radio-content">
+                                <strong>Alto</strong>
+                                <span>Reforma total: acabados premium, mobiliario de alta gama.</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección RESIDENCIAL -->
+            <div id="section-residencial" class="conditional-section active">
+                <div class="form-section">
+                    <h3 class="section-title"><span class="step-num">3</span> ¿Cuáles espacios quieres transformar?</h3>
+                    <p class="section-hint">Agrega cada espacio con su tipo y metros cuadrados</p>
+                    <div class="espacios-container" id="espacios-container"></div>
+                    <button type="button" class="btn-add" onclick="agregarEspacio()">+ Agregar otro espacio</button>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title"><span class="step-num">4</span> Nivel de acabados</h3>
+                    <div class="radio-options" id="acabados-residencial">
+                        <label class="radio-card">
+                            <input type="radio" name="acabados-residencial" value="basico" checked>
+                            <span class="radio-content">
+                                <strong>Básico</strong>
+                                <span>Acabados estándar, mobiliario por reutilizar. Poca obra civil.</span>
+                            </span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="acabados-residencial" value="medio">
+                            <span class="radio-content">
+                                <strong>Medio</strong>
+                                <span>Diseño más completo, mobiliario nuevo, obra civil media (pintura, luces).</span>
+                            </span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="acabados-residencial" value="alto">
+                            <span class="radio-content">
+                                <strong>Alto</strong>
+                                <span>Reforma total: pisos, muros, iluminación, todo nuevo o de alta gama.</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consentimientos -->
+            <div class="consent-section">
+                <label class="checkbox-row">
+                    <input type="checkbox" id="consent-datos" required>
+                    <span>Acepto el tratamiento de datos personales</span>
+                </label>
+                <label class="checkbox-row">
+                    <input type="checkbox" id="consent-whatsapp" required>
+                    <span>Acepto que me contacten por WhatsApp</span>
+                </label>
+            </div>
+
+            <button class="btn-calculate" onclick="calcularCotizacion()">¡QUIERO VER MI ESTIMADO!</button>
         </div>
 
         <div class="cotizador-results" id="cotizador-results" style="display: none;">
@@ -570,7 +725,7 @@
                 <p class="materializacion-note" id="resultado-explicacion"></p>
 
                 <div class="breakdown-section">
-                    <h5>Desglose por espacio:</h5>
+                    <h5>Desglose:</h5>
                     <div id="desglose-espacios"></div>
                 </div>
 
@@ -583,6 +738,8 @@
                 <p>¿Tienes dudas? Agenda una llamada gratuita</p>
                 <a href="https://calendly.com/d/cpy7-tt6-b65/quiero-transformar-mi-espacio-con-espacial" class="btn-cta" target="_blank">AGENDAR LLAMADA</a>
             </div>
+
+            <button class="btn-recalculate" onclick="recalcularProyecto()">RECALCULAR MI PROYECTO</button>
         </div>
     </div>
 

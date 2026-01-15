@@ -1,9 +1,10 @@
 // ============================================
 // COTIZADOR ESPACIAL ESTUDIO
 // Precios actualizados 2026 (Brochure)
+// Soporta proyectos Residenciales y Comerciales
 // ============================================
 
-// Precios de DISEÑO por número de espacios (Brochure 2026)
+// Precios de DISEÑO por número de espacios (Brochure 2026 - Residencial)
 const PRECIOS_DISENO = {
     1: 2800000,
     2: 5200000,
@@ -17,7 +18,14 @@ const PRECIOS_DISENO = {
     10: 13650000
 };
 
-// Precios por tipo de espacio para MATERIALIZACIÓN
+// Precios de DISEÑO por m² (Comercial)
+const PRECIO_DISENO_COMERCIAL_M2 = {
+    basico: 80000,
+    medio: 120000,
+    alto: 180000
+};
+
+// Precios por tipo de espacio para MATERIALIZACIÓN (Residencial)
 const PRECIOS_MATERIALIZACION = {
     cocina: {
         basico: 25000000,
@@ -71,6 +79,13 @@ const PRECIOS_MATERIALIZACION = {
     }
 };
 
+// Precios de MATERIALIZACIÓN por m² (Comercial)
+const PRECIO_MAT_COMERCIAL_M2 = {
+    basico: 800000,
+    medio: 1500000,
+    alto: 2500000
+};
+
 // Tipos de espacio disponibles (con tildes y eñes)
 const TIPOS_ESPACIO = [
     { value: 'cocina', label: 'Cocina' },
@@ -90,20 +105,30 @@ const VARIACION = 0.15;
 
 let espacioCounter = 0;
 
-// Mapeo de valores antiguos a nuevos (para compatibilidad con caché)
-function normalizarAcabados(valor) {
-    const mapeo = {
-        'estandar': 'basico',
-        'premium': 'medio',
-        'lujo': 'alto'
-    };
-    return mapeo[valor] || valor;
-}
-
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', function() {
     agregarEspacio();
+    setupProjectTypeToggle();
 });
+
+// Configurar toggle entre tipo de proyecto
+function setupProjectTypeToggle() {
+    const radios = document.querySelectorAll('input[name="tipo-proyecto"]');
+    radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const sectionResidencial = document.getElementById('section-residencial');
+            const sectionComercial = document.getElementById('section-comercial');
+
+            if (this.value === 'comercial') {
+                sectionResidencial.classList.remove('active');
+                sectionComercial.classList.add('active');
+            } else {
+                sectionComercial.classList.remove('active');
+                sectionResidencial.classList.add('active');
+            }
+        });
+    });
+}
 
 function agregarEspacio(tipo = '', metros = '') {
     espacioCounter++;
@@ -163,18 +188,11 @@ function getNombreEspacio(tipo) {
 function calcularCotizacion() {
     // Validar datos de contacto
     const nombre = document.getElementById('lead-nombre').value.trim();
-    const email = document.getElementById('lead-email').value.trim();
     const celular = document.getElementById('lead-celular').value.trim();
 
     if (!nombre) {
         alert('Por favor ingresa tu nombre.');
         document.getElementById('lead-nombre').focus();
-        return;
-    }
-
-    if (!email || !email.includes('@')) {
-        alert('Por favor ingresa un correo electrónico válido.');
-        document.getElementById('lead-email').focus();
         return;
     }
 
@@ -184,6 +202,89 @@ function calcularCotizacion() {
         return;
     }
 
+    // Validar checkboxes
+    const consentDatos = document.getElementById('consent-datos').checked;
+    const consentWhatsapp = document.getElementById('consent-whatsapp').checked;
+
+    if (!consentDatos) {
+        alert('Por favor acepta el tratamiento de datos personales.');
+        return;
+    }
+
+    if (!consentWhatsapp) {
+        alert('Por favor acepta que te contactemos por WhatsApp.');
+        return;
+    }
+
+    // Obtener tipo de proyecto
+    const tipoProyecto = document.querySelector('input[name="tipo-proyecto"]:checked').value;
+
+    if (tipoProyecto === 'comercial') {
+        calcularComercial(nombre, celular);
+    } else {
+        calcularResidencial(nombre, celular);
+    }
+}
+
+function calcularComercial(nombre, celular) {
+    const nombreNegocio = document.getElementById('comercial-nombre-negocio').value.trim();
+    const metros = parseFloat(document.getElementById('comercial-metros').value) || 0;
+
+    if (metros < 1) {
+        alert('Por favor ingresa los metros cuadrados de tu local.');
+        document.getElementById('comercial-metros').focus();
+        return;
+    }
+
+    // Obtener nivel de acabados
+    const acabadosInput = document.querySelector('input[name="acabados-comercial"]:checked');
+    const acabados = acabadosInput ? acabadosInput.value : 'basico';
+
+    // Calcular diseño comercial (por m²)
+    const costoDiseno = metros * PRECIO_DISENO_COMERCIAL_M2[acabados];
+
+    // Calcular materialización comercial (por m²)
+    const costoMaterializacion = metros * PRECIO_MAT_COMERCIAL_M2[acabados];
+
+    // Rango de materialización
+    const matMin = Math.round(costoMaterializacion * (1 - VARIACION));
+    const matMax = Math.round(costoMaterializacion * (1 + VARIACION));
+
+    // Actualizar UI
+    document.getElementById('costo-diseno-principal').textContent = formatCOP(costoDiseno);
+    document.getElementById('valor-min').textContent = formatCOP(matMin);
+    document.getElementById('valor-max').textContent = formatCOP(matMax);
+
+    // Desglose
+    const desgloseContainer = document.getElementById('desglose-espacios');
+    desgloseContainer.innerHTML = `
+        <div class="breakdown-item">
+            <span>Local comercial (${metros}m²)</span>
+            <span>${formatCOP(costoMaterializacion)}</span>
+        </div>
+    `;
+
+    // Explicación
+    const acabadosText = acabados === 'basico' ? 'básico' : acabados === 'medio' ? 'medio' : 'alto';
+    document.getElementById('resultado-explicacion').textContent =
+        `Proyecto comercial de ${metros}m² con nivel de acabados ${acabadosText}`;
+
+    // Log lead
+    console.log('Nuevo Lead Espacial (Comercial):', {
+        nombre, celular, nombreNegocio,
+        tipoProyecto: 'comercial',
+        metros,
+        acabados,
+        costoDiseno,
+        estimadoMin: matMin,
+        estimadoMax: matMax,
+        fecha: new Date().toISOString()
+    });
+
+    mostrarResultados();
+}
+
+function calcularResidencial(nombre, celular) {
     // Obtener espacios
     const espaciosRows = document.querySelectorAll('.espacio-row');
     const espacios = [];
@@ -206,10 +307,9 @@ function calcularCotizacion() {
         return;
     }
 
-    // Obtener nivel de acabados (con compatibilidad para valores antiguos)
-    const acabadosInput = document.querySelector('input[name="acabados"]:checked');
-    const acabadosRaw = acabadosInput ? acabadosInput.value : 'basico';
-    const acabados = normalizarAcabados(acabadosRaw);
+    // Obtener nivel de acabados
+    const acabadosInput = document.querySelector('input[name="acabados-residencial"]:checked');
+    const acabados = acabadosInput ? acabadosInput.value : 'basico';
 
     // Calcular costo de MATERIALIZACIÓN por espacio
     let costoMaterializacion = 0;
@@ -267,11 +367,12 @@ function calcularCotizacion() {
     // Explicación
     const acabadosText = acabados === 'basico' ? 'básico' : acabados === 'medio' ? 'medio' : 'alto';
     document.getElementById('resultado-explicacion').textContent =
-        `${espacios.length} espacio${espacios.length > 1 ? 's' : ''} con nivel de intervención ${acabadosText}`;
+        `${espacios.length} espacio${espacios.length > 1 ? 's' : ''} con nivel de acabados ${acabadosText}`;
 
     // Log lead (para futuro webhook)
-    console.log('Nuevo Lead Espacial:', {
-        nombre, email, celular,
+    console.log('Nuevo Lead Espacial (Residencial):', {
+        nombre, celular,
+        tipoProyecto: 'residencial',
         espacios: desglose,
         acabados,
         estimadoMin: matMin,
@@ -281,10 +382,46 @@ function calcularCotizacion() {
         fecha: new Date().toISOString()
     });
 
+    mostrarResultados();
+}
+
+function mostrarResultados() {
     // Ocultar formulario, mostrar resultados
     document.getElementById('cotizador-form').style.display = 'none';
     document.getElementById('cotizador-results').style.display = 'block';
 
     // Scroll suave hacia resultados
     document.getElementById('cotizador-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function recalcularProyecto() {
+    // Ocultar resultados, mostrar formulario
+    document.getElementById('cotizador-results').style.display = 'none';
+    document.getElementById('cotizador-form').style.display = 'block';
+
+    // Limpiar campos
+    document.getElementById('lead-nombre').value = '';
+    document.getElementById('lead-celular').value = '';
+    document.getElementById('comercial-nombre-negocio').value = '';
+    document.getElementById('comercial-metros').value = '';
+    document.getElementById('consent-datos').checked = false;
+    document.getElementById('consent-whatsapp').checked = false;
+
+    // Reset tipo de proyecto a residencial
+    document.querySelector('input[name="tipo-proyecto"][value="residencial"]').checked = true;
+    document.getElementById('section-comercial').classList.remove('active');
+    document.getElementById('section-residencial').classList.add('active');
+
+    // Reset acabados
+    document.querySelector('input[name="acabados-residencial"][value="basico"]').checked = true;
+    document.querySelector('input[name="acabados-comercial"][value="basico"]').checked = true;
+
+    // Limpiar espacios y agregar uno nuevo
+    const container = document.getElementById('espacios-container');
+    container.innerHTML = '';
+    espacioCounter = 0;
+    agregarEspacio();
+
+    // Scroll hacia arriba
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
