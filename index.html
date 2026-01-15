@@ -62,11 +62,20 @@
             object-fit: contain;
         }
 
-        /* Cotizador slide */
+        /* Cotizador slide - enable scrolling */
         .slide-cotizador {
             background-color: var(--white);
             overflow-y: auto !important;
             padding: 40px 20px !important;
+            display: block !important;
+            height: 100% !important;
+        }
+
+        .reveal .slides section.slide-cotizador {
+            overflow-y: auto !important;
+            height: 100% !important;
+            top: 0 !important;
+            padding-bottom: 80px !important;
         }
 
         .cotizador-container {
@@ -698,7 +707,7 @@
             hash: true,
             controls: true,
             progress: true,
-            center: true,
+            center: false,
             transition: 'fade',
             transitionSpeed: 'slow',
             width: '100%',
