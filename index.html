@@ -533,6 +533,283 @@
             color: var(--text-muted);
             z-index: 100;
         }
+
+        /* ==========================================
+           RESPONSIVE - Mobile Landscape
+           ========================================== */
+
+        /* Mobile landscape (height < 500px and width > height) */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .slide-image {
+                padding: 5px;
+            }
+
+            .slide-image img {
+                max-height: 95vh;
+                max-width: 95vw;
+                object-fit: contain;
+            }
+
+            /* Cotizador en landscape móvil */
+            .slide-cotizador {
+                padding: 15px 20px !important;
+            }
+
+            .reveal .slides section.slide-cotizador {
+                padding-bottom: 40px !important;
+            }
+
+            .cotizador-container {
+                max-width: 90%;
+            }
+
+            .cotizador-title {
+                font-size: 1.4rem;
+                margin-bottom: 4px;
+            }
+
+            .cotizador-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 12px;
+            }
+
+            .form-section {
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+            }
+
+            .section-title {
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
+
+            .step-num {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+
+            .section-hint {
+                font-size: 0.7rem;
+                margin-bottom: 8px;
+            }
+
+            /* Espacios en grid horizontal */
+            .espacios-container {
+                gap: 5px;
+                margin-bottom: 8px;
+            }
+
+            .espacio-row {
+                padding: 5px;
+                gap: 5px;
+            }
+
+            .espacio-row select,
+            .espacio-row input {
+                padding: 5px;
+                font-size: 0.75rem;
+            }
+
+            .btn-remove {
+                width: 22px;
+                height: 22px;
+                font-size: 0.85rem;
+            }
+
+            .btn-add {
+                padding: 6px;
+                font-size: 0.75rem;
+            }
+
+            /* Radio options en fila */
+            .radio-options {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .radio-card {
+                flex: 1;
+                min-width: 120px;
+                padding: 6px 8px;
+                font-size: 0.75rem;
+            }
+
+            .radio-content span {
+                font-size: 0.65rem;
+            }
+
+            /* Campos de contacto en fila */
+            .form-fields {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .form-fields input {
+                flex: 1;
+                min-width: 150px;
+                padding: 8px;
+                font-size: 0.8rem;
+            }
+
+            .btn-calculate {
+                padding: 10px;
+                font-size: 0.85rem;
+                margin-top: 10px;
+            }
+
+            /* Resultados compactos */
+            .cotizador-results {
+                margin-top: 15px;
+            }
+
+            .main-result {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+
+            .result-label {
+                font-size: 0.7rem;
+                margin-bottom: 4px;
+            }
+
+            .result-value {
+                font-size: 1.4rem;
+            }
+
+            .result-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .result-explanation {
+                font-size: 0.7rem;
+            }
+
+            .payment-section {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            .payment-section h4 {
+                font-size: 0.8rem;
+            }
+
+            .payment-note {
+                font-size: 0.65rem;
+                margin-bottom: 6px;
+            }
+
+            .payment-options {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .payment-option {
+                flex: 1;
+                min-width: 140px;
+                padding: 5px 8px;
+                font-size: 0.7rem;
+            }
+
+            .payment-option .discount {
+                padding: 2px 5px;
+                font-size: 0.6rem;
+            }
+
+            .materializacion-section {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            .materializacion-section h4 {
+                font-size: 0.8rem;
+            }
+
+            .materializacion-value {
+                font-size: 1.1rem;
+                margin-bottom: 3px;
+            }
+
+            .materializacion-note {
+                font-size: 0.65rem;
+                margin-bottom: 8px;
+            }
+
+            .materializacion-section .breakdown-section {
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+
+            .materializacion-section .breakdown-section h5 {
+                font-size: 0.7rem;
+                margin-bottom: 5px;
+            }
+
+            .breakdown-item {
+                padding: 4px 0;
+                font-size: 0.75rem;
+            }
+
+            .materializacion-section .disclaimer p {
+                font-size: 0.6rem;
+            }
+
+            .cta-section {
+                padding-top: 10px;
+            }
+
+            .cta-section p {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+
+            .btn-cta {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            /* Ocultar controles de reveal en landscape móvil para más espacio */
+            .reveal .controls {
+                transform: scale(0.7);
+            }
+
+            .reveal .progress {
+                height: 3px;
+            }
+        }
+
+        /* Tablets y pantallas medianas */
+        @media screen and (max-width: 768px) and (orientation: portrait) {
+            .cotizador-container {
+                max-width: 95%;
+            }
+
+            .cotizador-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Móvil pequeño portrait */
+        @media screen and (max-width: 400px) {
+            .cotizador-title {
+                font-size: 1.6rem;
+            }
+
+            .espacio-row {
+                grid-template-columns: 1fr 60px 28px;
+            }
+
+            .radio-card {
+                padding: 8px;
+            }
+
+            .radio-content span {
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
 <body>
