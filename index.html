@@ -818,7 +818,9 @@
             display: flex !important;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal-medium) 100%);
+            background-image: url('images/fondo-espacial-ppt.jpg');
+            background-size: cover;
+            background-position: center;
             width: 100%;
             height: 100%;
             padding-bottom: 18%;
@@ -920,28 +922,29 @@
         /* Botón comenzar */
         .btn-comenzar {
             position: absolute;
-            bottom: 12%;
+            bottom: 8%;
             left: 50%;
             transform: translateX(-50%);
-            padding: 14px 40px;
-            background-color: rgba(255,255,255,0.15);
-            color: #fff;
-            border: 2px solid rgba(255,255,255,0.5);
-            border-radius: 6px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            width: 280px;
+            max-width: 90%;
             cursor: pointer;
             opacity: 0;
             animation: fadeInButton 0.6s ease-out forwards;
             animation-delay: 1.8s;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
             z-index: 10;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
         .btn-comenzar:hover {
-            background-color: rgba(255,255,255,0.3);
+            transform: translateX(-50%) scale(1.03);
+        }
+
+        .btn-comenzar svg {
+            width: 100%;
+            height: auto;
         }
 
         @keyframes fadeInButton {
@@ -1138,7 +1141,14 @@
                         </g>
                     </svg>
                 </div>
-                <button class="btn-comenzar" onclick="Reveal.next()">COMENZAR</button>
+                <button class="btn-comenzar" onclick="Reveal.next()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 147.29">
+                        <rect fill="#04333b" x="60" y="31.64" width="492" height="84"/>
+                        <text fill="#fff" font-family="Outfit, sans-serif" font-size="29.98px" font-weight="700" letter-spacing=".44em" transform="translate(93.66 85.05)">COMENZAR</text>
+                        <line fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4px" x1="396" y1="72.64" x2="513" y2="72.64"/>
+                        <polyline fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4px" points="502 85.64 515.86 71.78 501.36 57.28"/>
+                    </svg>
+                </button>
             </section>
 
             <!-- Slide 1: Cover -->
