@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador | Espacial Estudio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Tipografías locales */
+        @font-face {
+            font-family: 'Playfair Display';
+            src: url('fonts/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('fonts/Montserrat-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
         :root {
             --teal-dark: #1a4a4a;
             --teal-medium: #2d5f5f;
@@ -28,7 +41,7 @@
         }
 
         body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--beige-light);
             min-height: 100vh;
             padding: 40px 20px;
@@ -49,7 +62,7 @@
         }
 
         .header-logo a {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1rem;
             letter-spacing: 4px;
             color: var(--teal-dark);
@@ -57,7 +70,7 @@
         }
 
         .cotizador-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
             font-style: italic;
             text-align: center;
@@ -85,7 +98,7 @@
         }
 
         .section-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             color: var(--teal-dark);
             margin-bottom: 8px;
@@ -103,7 +116,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 0.8rem;
         }
 
@@ -356,7 +369,7 @@
         }
 
         .result-value {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
         }
 
@@ -443,7 +456,7 @@
         }
 
         .materializacion-value {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             color: var(--text-dark);
             margin-bottom: 5px;
@@ -502,7 +515,7 @@
         }
 
         .cta-section p {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             color: var(--teal-dark);
             margin-bottom: 12px;
