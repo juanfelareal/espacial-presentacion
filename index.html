@@ -1113,6 +1113,80 @@
                 font-size: 0.75rem;
             }
         }
+
+        /* ==========================================
+           SLIDE CONTACTO FINAL - con botones SVG
+           ========================================== */
+        .slide-contact-final {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-contact-final .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 1;
+        }
+
+        .contact-buttons-container {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-final {
+            display: block;
+            width: 380px;
+            max-width: 90vw;
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-final:hover {
+            transform: scale(1.03);
+        }
+
+        .btn-final svg {
+            width: 100%;
+            height: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .contact-buttons-container {
+                bottom: 10%;
+                gap: 10px;
+            }
+
+            .btn-final {
+                width: 300px;
+            }
+        }
+
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .contact-buttons-container {
+                bottom: 8%;
+                gap: 8px;
+            }
+
+            .btn-final {
+                width: 280px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1213,8 +1287,26 @@
             </section>
 
             <!-- Slide 12: Contact -->
-            <section class="slide-image">
-                <img src="images/slides/slide-final.jpg" alt="Contacto">
+            <section class="slide-contact-final">
+                <img src="images/slides/slide-final.jpg" alt="Contacto" class="bg-image">
+                <div class="contact-buttons-container">
+                    <a href="cotizador.html" class="btn-final">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 147.29">
+                            <rect fill="#04333b" x="60" y="31.64" width="492" height="84"/>
+                            <text fill="#fff" font-family="Outfit, sans-serif" font-size="22px" font-weight="700" letter-spacing=".15em" transform="translate(80 85)">QUIERO CALCULAR LA INVERSIÓN</text>
+                            <line fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4px" x1="430" y1="72.64" x2="513" y2="72.64"/>
+                            <polyline fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4px" points="502 85.64 515.86 71.78 501.36 57.28"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn-final">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 147.29">
+                            <rect fill="#04333b" x="60" y="31.64" width="492" height="84"/>
+                            <text fill="#fff" font-family="Outfit, sans-serif" font-size="22px" font-weight="700" letter-spacing=".15em" transform="translate(80 85)">QUIERO AGENDAR UNA LLAMADA</text>
+                            <line fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4px" x1="430" y1="72.64" x2="513" y2="72.64"/>
+                            <polyline fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4px" points="502 85.64 515.86 71.78 501.36 57.28"/>
+                        </svg>
+                    </a>
+                </div>
             </section>
 
         </div>
